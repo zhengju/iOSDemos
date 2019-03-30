@@ -18,25 +18,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
+
 - (IBAction)uRLRequesCallPhone:(UIButton *)sender {
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"10086"];
+    NSMutableString * callPhone=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"10086"];
     UIWebView * callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:callPhone]]];
     [self.view addSubview:callWebview];
 }
 
 - (IBAction)uRLTelprompCallPbone:(UIButton *)sender {
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt:%@",@"10086"];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-}
-
-- (IBAction)uRLTellCallPhone:(UIButton *)sender {
     NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@", @"10086"];
     if (@available(iOS 10.0, *)) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
     }
+}
+
+- (IBAction)uRLTellCallPhone:(UIButton *)sender {
+    NSMutableString * callPhone=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"10086"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
+    
+   
 }
 
 

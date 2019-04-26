@@ -17,6 +17,7 @@
 		7AB33F352272DF8700935669 /* 2222.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7AB33F302272DF8700935669 /* 2222.mp4 */; };
 		7AB33F362272DF8700935669 /* 2233.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7AB33F342272DF8700935669 /* 2233.mp4 */; };
 		7AB33F402272E4D700935669 /* ZJDisplayCropFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB33F3F2272E4D700935669 /* ZJDisplayCropFilter.m */; };
+		7AB33F5D22730E4E00935669 /* WID-small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AB33F5922730E4E00935669 /* WID-small.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7AB33F342272DF8700935669 /* 2233.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2233.mp4; path = ../../../CResources/2233.mp4; sourceTree = "<group>"; };
 		7AB33F3E2272E4D700935669 /* ZJDisplayCropFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJDisplayCropFilter.h; sourceTree = "<group>"; };
 		7AB33F3F2272E4D700935669 /* ZJDisplayCropFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJDisplayCropFilter.m; sourceTree = "<group>"; };
+		7AB33F5922730E4E00935669 /* WID-small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "WID-small.jpg"; path = "../../../CResources/WID-small.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				7AB33F212272DB3D00935669 /* libs */,
 				7AB33F302272DF8700935669 /* 2222.mp4 */,
 				7AB33F342272DF8700935669 /* 2233.mp4 */,
+				7AB33F5922730E4E00935669 /* WID-small.jpg */,
 				7AB33F0A2272DA7E00935669 /* AppDelegate.h */,
 				7AB33F0B2272DA7E00935669 /* AppDelegate.m */,
 				7AB33F0D2272DA7E00935669 /* ViewController.h */,
@@ -208,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB33F5D22730E4E00935669 /* WID-small.jpg in Resources */,
 				7AB33F172272DA7F00935669 /* LaunchScreen.storyboard in Resources */,
 				7AB33F142272DA7F00935669 /* Assets.xcassets in Resources */,
 				7AB33F122272DA7E00935669 /* Main.storyboard in Resources */,

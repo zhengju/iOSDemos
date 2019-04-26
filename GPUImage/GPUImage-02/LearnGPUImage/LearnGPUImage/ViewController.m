@@ -70,17 +70,35 @@
     [cropFilter addTarget:displayCropFilter];
     
   
-    GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc] init];
-    gaussianBlur.blurRadiusInPixels = 25.0;
-    [cropFilter addTarget:gaussianBlur];
+//    GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc] init];
+//    gaussianBlur.blurRadiusInPixels = 25.0;
+//    [cropFilter addTarget:gaussianBlur];
     
+    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
+    imageView.image = [UIImage imageNamed:@"WID-small.jpg"];
+    
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, (self.view.bounds.size.height - self.view.bounds.size.width)/2.0, self.view.bounds.size.width, self.view.bounds.size.width)];
+    [view addSubview:imageView];
+
     GPUImageAlphaBlendFilter *blendFilter = [[GPUImageAlphaBlendFilter alloc] init];
-    blendFilter.mix = 1.0;
+    blendFilter.mix = 1;
     
-    [gaussianBlur addTarget:blendFilter];
-    [displayCropFilter addTarget:blendFilter];
+    GPUImageUIElement * element = [[GPUImageUIElement alloc]initWithView:view];
+    [element addTarget:blendFilter];
+ 
+    GPUImageFilter * progressFilter = [[GPUImageFilter alloc]init];
+    [displayCropFilter addTarget:progressFilter];
+    
+    
+    [progressFilter addTarget:blendFilter];
+//    [displayCropFilter addTarget:blendFilter];
     
     [blendFilter addTarget:playerView];
+    
+    [progressFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+        [element update];
+    }];
+    
     
     //save video 
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.mp4"];

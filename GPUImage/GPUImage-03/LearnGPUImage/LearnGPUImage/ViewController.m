@@ -53,7 +53,7 @@
     [self.view addSubview:playerView];
     
     
-    NSURL * inputMovieURL = [[NSBundle mainBundle] URLForResource:@"2233" withExtension:@"mp4"];
+    NSURL * inputMovieURL = [[NSBundle mainBundle] URLForResource:@"驾校视频" withExtension:@"MOV"];
     
     //判断是否有旋转
     AVAsset * asset = [AVAsset assetWithURL:inputMovieURL];
@@ -236,19 +236,14 @@
  }
 
 }
+
 #pragma mark - ProportionBottomViewDelegate
 - (void)proportionBottomView:(NSInteger)index{
+
+    CGFloat rate = 1.0;
     
-    //视频size
-    CGFloat videoW = naturalSize.width;//136
-    CGFloat videoH = naturalSize.height;//204
-    
-    CGFloat rate = videoW/videoH;
-    
-    if (index == 0) {
-//        [self.cLplayer setAVPlayerVideoAuto];
-//        _videoCroppingFrame = CGRectMake(0, 0, videoW, videoH);
-        return;
+    if (index == 0) {//视频原始比例
+        rate = naturalSize.width/naturalSize.height;
     }else if (index == 1) {//1:1
         rate = 1;
     }else if (index == 2){//4:3
@@ -270,51 +265,86 @@
     }else if (index == 10){
         rate = 1/2.0;
     }
-    
-    
-     //[displayCropFilter setDrawRect:CGRectMake(0, 0, 1, rate)];
-    //playView
-    
-    CGRect frame = originFrame;
-    
-    CGFloat originWidth = frame.size.width;
-    CGFloat originHeight = frame.size.height;
-    
-    
-    CGFloat width = frame.size.width;
-    CGFloat height = frame.size.height;
-    if (rate < 1) {//以高
-        width = height*rate;
-    }else{//以宽
-        height = width/rate;
-    }
-    /*******/
-    playerView.frame = CGRectMake((originWidth-width)/2.0, (originHeight-height)/2.0+64, width, height);
-    
-    /*******/
-    CGRect drawRect = CGRectMake(0, (1 - naturalSize.height / naturalSize.width) / 2.0, 1, naturalSize.height / naturalSize.width);//以宽
-    
-    
-    
-    
-    if (naturalSize.height > naturalSize.width) {//以高
-        drawRect = CGRectMake((1 - naturalSize.width / naturalSize.height) / 2.0, 0, naturalSize.width / naturalSize.height, 1);
 
-            if ((naturalSize.width / naturalSize.height < rate)) {
-                
-                CGFloat drawRectWidth = height * (naturalSize.width / naturalSize.height)/width;
-                drawRect = CGRectMake((1 - drawRectWidth) / 2.0, 0, drawRectWidth, 1);
-                
-            }else{//显示的高，视频的高用不完
-                CGFloat drawRectHeight = width/(naturalSize.width / naturalSize.height)/height;
-                drawRect = CGRectMake(0, (1 - drawRectHeight) / 2.0, 1, drawRectHeight);
-            }
-    }
+
+    CGRect frame = [self frameWithPlayerViewOriginFrame:originFrame videorate:rate];
     
+    /*******/
+    [UIView animateWithDuration:0.3 animations:^{
+        playerView.frame = frame;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    /*******/
+    CGRect drawRect = [self drawRectWithNaturalSize:naturalSize playViewSize:frame.size videorate:rate];
     [displayCropFilter setDrawRect:drawRect];
     
     /*******/
     [movieFile processMovieFrame:movieFile.pixelBuffer withSampleTime:movieFile.currentSampleTime];
     
 }
+
+/**
+ 视频playerView显示的frame
+
+ @param originFrame 视频view的原始frame
+ @param rate 视频将要显示的比例
+ @return frame
+ */
+- (CGRect)frameWithPlayerViewOriginFrame:(CGRect)originFrame videorate:(CGFloat)rate{
+    
+    CGRect frame = originFrame;
+    
+    CGFloat originWidth = frame.size.width;
+    CGFloat originHeight = frame.size.height;
+    
+    CGFloat width = frame.size.width;
+    CGFloat height = frame.size.height;
+    
+    if (rate < 1) {//以高
+        
+        width = height * rate;
+    }else{//以宽
+        
+        height = width / rate;
+    }
+    
+    return CGRectMake((originWidth-width)/2.0, (originHeight-height)/2.0+64, width, height);
+}
+
+/**
+ 视频按比例渲染的frame
+
+ @param naturalSize 视频原始size
+ @param playViewSize 视频PayerView显示的size
+ @param rate 比例
+ @return 视频渲染frame (0,0,1,1)
+ */
+- (CGRect)drawRectWithNaturalSize:(CGSize)naturalSize playViewSize:(CGSize)playViewSize  videorate:(CGFloat)rate{
+    
+    CGFloat width = playViewSize.width;
+    CGFloat height = playViewSize.height;
+    
+    CGRect drawRect = CGRectMake(0, (1 - naturalSize.height / naturalSize.width) / 2.0, 1, naturalSize.height / naturalSize.width);//以宽
+    
+    if (naturalSize.height > naturalSize.width) {//以高
+        
+        drawRect = CGRectMake((1 - naturalSize.width / naturalSize.height) / 2.0, 0, naturalSize.width / naturalSize.height, 1);
+    }
+    
+    if ((naturalSize.width / naturalSize.height) < rate) {
+        
+        CGFloat drawRectWidth = height * (naturalSize.width / naturalSize.height)/width;
+        drawRect = CGRectMake((1 - drawRectWidth) / 2.0, 0, drawRectWidth, 1);
+    }else{//显示的高，视频的高用不完
+        
+        CGFloat drawRectHeight = width/(naturalSize.width / naturalSize.height)/height;
+        drawRect = CGRectMake(0, (1 - drawRectHeight) / 2.0, 1, drawRectHeight);
+    }
+    
+    return drawRect;
+}
+
+
 @end

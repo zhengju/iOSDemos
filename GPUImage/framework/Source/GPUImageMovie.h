@@ -43,6 +43,9 @@
 @property (readonly, nonatomic) BOOL audioEncodingIsFinished;
 @property (readonly, nonatomic) BOOL videoEncodingIsFinished;
 
+@property(nonatomic) CVPixelBufferRef  pixelBuffer;
+@property (nonatomic) CMTime currentSampleTime;
+
 /// @name Initialization and teardown
 - (id)initWithAsset:(AVAsset *)asset;
 - (id)initWithPlayerItem:(AVPlayerItem *)playerItem;
@@ -58,4 +61,5 @@
 - (void)cancelProcessing;
 - (void)processMovieFrame:(CMSampleBufferRef)movieSampleBuffer; 
 - (void)processMovieFrame:(CVPixelBufferRef)movieFrame withSampleTime:(CMTime)currentSampleTime;
+
 @end

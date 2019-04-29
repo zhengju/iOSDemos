@@ -33,6 +33,9 @@
 }
 - (void)setupGPUImage{
     
+    
+    BOOL rote = NO;
+    
     self.progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, self.view.bounds.size.height-40, 100, 30)];
     self.progressLabel.text = @"0%";
     [self.view addSubview:self.progressLabel];
@@ -69,37 +72,39 @@
     [displayCropFilter setDrawRect:CGRectMake(0, (1 - 360.0 / 640.0) / 2.0, 1, 360.0 / 640.0)];//设置渲染区域 视频按比例显示
     [cropFilter addTarget:displayCropFilter];
     
-  
-//    GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc] init];
-//    gaussianBlur.blurRadiusInPixels = 25.0;
-//    [cropFilter addTarget:gaussianBlur];
     
-    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
-    imageView.image = [UIImage imageNamed:@"WID-small.jpg"];
-    
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, (self.view.bounds.size.height - self.view.bounds.size.width)/2.0, self.view.bounds.size.width, self.view.bounds.size.width)];
-    [view addSubview:imageView];
-
     GPUImageAlphaBlendFilter *blendFilter = [[GPUImageAlphaBlendFilter alloc] init];
     blendFilter.mix = 1;
-    
-    GPUImageUIElement * element = [[GPUImageUIElement alloc]initWithView:view];
-    [element addTarget:blendFilter];
- 
-    GPUImageFilter * progressFilter = [[GPUImageFilter alloc]init];
-    [displayCropFilter addTarget:progressFilter];
-    
-    
-    [progressFilter addTarget:blendFilter];
-//    [displayCropFilter addTarget:blendFilter];
-    
+    if (rote == YES) {//比例蒙层
+        GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc] init];
+        gaussianBlur.blurRadiusInPixels = 25.0;
+        [cropFilter addTarget:gaussianBlur];
+        
+        [gaussianBlur addTarget:blendFilter];
+        [displayCropFilter addTarget:blendFilter];
+        
+    }else{//显示背景图片
+        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
+        imageView.image = [UIImage imageNamed:@"WID-small.jpg"];
+        
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, (self.view.bounds.size.height - self.view.bounds.size.width)/2.0, self.view.bounds.size.width, self.view.bounds.size.width)];
+        [view addSubview:imageView];
+        GPUImageUIElement * element = [[GPUImageUIElement alloc]initWithView:view];
+        
+        GPUImageFilter * progressFilter = [[GPUImageFilter alloc]init];//进度filter
+        [displayCropFilter addTarget:progressFilter];
+        
+        [element addTarget:blendFilter];
+        [progressFilter addTarget:blendFilter];
+        
+        [progressFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+            [element update];
+        }];
+        
+    }
+
     [blendFilter addTarget:playerView];
-    
-    [progressFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
-        [element update];
-    }];
-    
-    
+
     //save video 
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.mp4"];
     unlink([pathToMovie UTF8String]);

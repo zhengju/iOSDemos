@@ -333,7 +333,7 @@
         drawRect = CGRectMake((1 - naturalSize.width / naturalSize.height) / 2.0, 0, naturalSize.width / naturalSize.height, 1);
     }
     
-    if ((naturalSize.width / naturalSize.height) < rate) {
+    if ((naturalSize.width / naturalSize.height) <= rate) {
         
         CGFloat drawRectWidth = height * (naturalSize.width / naturalSize.height)/width;
         drawRect = CGRectMake((1 - drawRectWidth) / 2.0, 0, drawRectWidth, 1);

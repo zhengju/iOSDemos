@@ -72,7 +72,7 @@
     
     [self.view addSubview:view];
     
-//    __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
 
     
     dispatch_group_t dispatchGroup = dispatch_group_create();
@@ -81,27 +81,23 @@
     
     [self clipAction:^{
         
+        for (NSString * path  in self.localPaths) {
+            AVURLAsset * asset  = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
+            [weakSelf loadAsset:asset withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
+        }
       
+        dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
+            [weakSelf play];
+        });
+        
     }];
 
-    sleep(1);
-    for (NSString * path  in self.localPaths) {
-        AVURLAsset * asset  = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
-        [self loadAsset:asset withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
-    }
-    
-
-    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
-        [self play];
-    });
-  
-    
 }
 - (void)play{
     self.editor = [[ZJSimpleEditor alloc]init];
     self.editor.clips = self.clips;
-    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(10, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(10, 1))]];
-    self.editor.transitionDuration = CMTimeMakeWithSeconds(0.01, 30);
+    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(5, 1))]];
+    self.editor.transitionDuration = CMTimeMakeWithSeconds(1, 30);
     [self.editor buildCompositionObjectsForPlayback];
     
     [self.player replaceCurrentItemWithPlayerItem:self.editor.playerItem];
@@ -127,8 +123,7 @@
         }
         
         [self.clips addObject:asset];
-        // This code assumes that both assets are atleast 5 seconds long.
-//        [self.clipTimeRanges addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(5, 1))]];
+
     bail:
         dispatch_group_leave(dispatchGroup);
     }];
@@ -139,17 +134,26 @@
     CGSize videoSize = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
     
     NSDictionary * clip0 = @{@"start":@(0),
-                             @"duration":@(10)
+                             @"duration":@(5)
                              };
     
-    NSDictionary * clip1 = @{@"start":@(33),
-                             @"duration":@(10)
+    NSDictionary * clip2 = @{@"start":@(11),
+                             @"duration":@(6)
                              };
     
+    NSDictionary * clip1 = @{@"start":@(25),
+                             @"duration":@(5)
+                             };
     
-    NSArray * clips = @[clip0,clip1];
+    NSArray * clips = @[clip1,clip2,clip0];
+    
+    
+      dispatch_group_t dispatchGroup = dispatch_group_create();
+    
     
     for (int i = 0 ; i < clips.count ; i++) {
+        
+         dispatch_group_enter(dispatchGroup);
         
         NSDictionary * clip = clips[i];
         
@@ -180,7 +184,6 @@
             [audioTrack insertTimeRange:tiemRange ofTrack:[audioTracks lastObject] atTime:kCMTimeZero error:&error];
         }
         
-        
         AVMutableVideoCompositionInstruction * mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
         mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, videoTrack.timeRange.duration);
         
@@ -209,23 +212,18 @@
         exporter.shouldOptimizeForNetworkUse = YES;
         exporter.videoComposition = mainComposition;
         [exporter exportAsynchronouslyWithCompletionHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                
-                
-                
-                if (SuccessBlock && exporter.progress == 1) {
-                    SuccessBlock();
-                }
-                
-                //这里是输出视频之后的操作
-                //            [self cropExportDidFinish:exporter];
-            });
-        }];
-        
-    }
-}
 
+            dispatch_group_leave(dispatchGroup);
+
+        }];
+    }
+    
+    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^{
+         SuccessBlock();
+        // [self cropExportDidFinish:exporter];
+    });
+    
+}
 
 - (void)cropExportDidFinish:(AVAssetExportSession*)session {
     if (session.status == AVAssetExportSessionStatusCompleted) {

@@ -14,7 +14,7 @@
 		7A9B65BA22815EF000C278AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B65B822815EF000C278AB /* LaunchScreen.storyboard */; };
 		7A9B65BD22815EF000C278AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B65BC22815EF000C278AB /* main.m */; };
 		7A9B65C522815F4200C278AB /* 良品铺子.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B65C422815F4200C278AB /* 良品铺子.mp4 */; };
-		7A9B65CA22815F7D00C278AB /* ZJSimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B65C822815F7D00C278AB /* ZJSimpleEditor.m */; };
+		7A9B65EF22842BD300C278AB /* ZJSimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B65EE22842BD300C278AB /* ZJSimpleEditor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +29,8 @@
 		7A9B65BB22815EF000C278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A9B65BC22815EF000C278AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A9B65C422815F4200C278AB /* 良品铺子.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "良品铺子.mp4"; path = "../../Resources/良品铺子.mp4"; sourceTree = "<group>"; };
-		7A9B65C822815F7D00C278AB /* ZJSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZJSimpleEditor.m; path = ../../AVFoundation02/AVFoundation02/ZJSimpleEditor.m; sourceTree = "<group>"; };
-		7A9B65C922815F7D00C278AB /* ZJSimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZJSimpleEditor.h; path = ../../AVFoundation02/AVFoundation02/ZJSimpleEditor.h; sourceTree = "<group>"; };
+		7A9B65ED22842BD200C278AB /* ZJSimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSimpleEditor.h; sourceTree = "<group>"; };
+		7A9B65EE22842BD300C278AB /* ZJSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSimpleEditor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +68,9 @@
 				7A9B65AE22815EEF00C278AB /* AppDelegate.m */,
 				7A9B65B022815EEF00C278AB /* ViewController.h */,
 				7A9B65B122815EEF00C278AB /* ViewController.m */,
-				7A9B65C922815F7D00C278AB /* ZJSimpleEditor.h */,
-				7A9B65C822815F7D00C278AB /* ZJSimpleEditor.m */,
 				7A9B65B322815EEF00C278AB /* Main.storyboard */,
+				7A9B65ED22842BD200C278AB /* ZJSimpleEditor.h */,
+				7A9B65EE22842BD300C278AB /* ZJSimpleEditor.m */,
 				7A9B65B622815EF000C278AB /* Assets.xcassets */,
 				7A9B65B822815EF000C278AB /* LaunchScreen.storyboard */,
 				7A9B65BB22815EF000C278AB /* Info.plist */,
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A9B65CA22815F7D00C278AB /* ZJSimpleEditor.m in Sources */,
+				7A9B65EF22842BD300C278AB /* ZJSimpleEditor.m in Sources */,
 				7A9B65B222815EEF00C278AB /* ViewController.m in Sources */,
 				7A9B65BD22815EF000C278AB /* main.m in Sources */,
 				7A9B65AF22815EEF00C278AB /* AppDelegate.m in Sources */,

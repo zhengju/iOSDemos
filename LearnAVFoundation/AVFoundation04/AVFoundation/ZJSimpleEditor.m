@@ -3,9 +3,6 @@
 #import <CoreMedia/CoreMedia.h>
 
 @interface ZJSimpleEditor ()
-{
-//    AVMutableCompositionTrack *compositionVideoTracks[];
-}
 @property (nonatomic, readwrite, retain) AVMutableComposition *composition;
 @property (nonatomic, readwrite, retain) AVMutableVideoComposition *videoComposition;
 @property (nonatomic, readwrite, retain) AVMutableAudioMix *audioMix;
@@ -159,16 +156,30 @@
     AVMutableVideoCompositionInstruction *transitionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     transitionInstruction.timeRange = transitionTimeRange;
     AVMutableVideoCompositionLayerInstruction *fromLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
-    AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];//哪一个待定 暂时
+    AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
     // Fade in the toLayer by setting a ramp from 0.0 to 1.0.
     [toLayer setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:transitionTimeRange];
 
     switch (transitionType)
     {
-        case kTransitionTypeCrossFade:
+        case kTransitionTypeCrossFade://溶解
         {
             // Fade out the fromLayer by setting a ramp from 1.0 to 0.0.
             [fromLayer setOpacityRampFromStartOpacity:1.0 toEndOpacity:0.0 timeRange:transitionTimeRange];
+            
+            break;
+        }
+        case kTransitionTypeCropRectangle:
+        {
+
+            CGFloat videoWidth = compositionVideoTrack.naturalSize.width;
+            CGFloat videoHeight = compositionVideoTrack.naturalSize.height;
+            
+            CGRect startRect = CGRectMake(0.0f, 0.0f, videoWidth, videoHeight);
+            CGRect endRect = CGRectMake(videoWidth, videoHeight, 0.0f, 0.0f);
+            //通过裁剪实现擦除
+            [fromLayer setCropRectangleRampFromStartCropRectangle:startRect toEndCropRectangle:endRect timeRange:transitionTimeRange];
+
             break;
         }
         case kTransitionTypePushHorizontalSpinFromRight:
@@ -189,7 +200,7 @@
             
             break;
         }
-        case kTransitionTypePushHorizontalFromLeft:
+        case kTransitionTypePushHorizontalFromLeft://水平从左至右
         {
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(compositionVideoTrack.naturalSize.width, 0.0) timeRange:transitionTimeRange];
             

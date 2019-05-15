@@ -49,8 +49,8 @@
         }
     } forControlEvents:UIControlEventTouchUpInside];
 //    [self addSubview:dismissBtn];
-    //←↑→↓↖↙↗↘↕
-    NSArray * titles = @[@"无",@"↙",@"←",@"→",@"↑",@"↓",@"溶解",@"←↕→",@"回",@"→|←",@"↓↑"];
+    //←↑→↓↖↙↗↘↕⇅╬
+    NSArray * titles = @[@"无",@"↙",@"←",@"→",@"↑",@"↓",@"溶解",@"←↕→",@"回",@"→|←",@"↓↑",@"⇌",@"⇃↾",@"╬"];
     CGFloat w = 60;
     
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(dismissBtn.frame)+30 , self.frameW, w)];

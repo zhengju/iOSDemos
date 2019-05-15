@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, TransitionType)
     kTransitionTypePushVerticalFromTop,
     kTransitionTypeCrossFade,//溶解
     kTransitionTypeCropRectangle,//向四角擦除
+    kTransitionTypeMiddleTransform,//从四边向中间消失
     kTransitionTypeFadeInAndFadeOut,//淡入淡出
 };
 

@@ -9,7 +9,7 @@
 #import <Photos/Photos.h>
 
 #import "ZJSimpleEditor.h"
-
+#import "OperatioCrossingEffectView.h"
 #define KScreenWidth [UIScreen mainScreen].bounds.size.width
 @interface playerView()
 
@@ -31,13 +31,16 @@
 @end
 
 
-@interface ViewController ()
+@interface ViewController ()<OperatioCrossingEffectViewDelegate>
 
 @property(nonatomic, strong) AVURLAsset * asset;
 @property(nonatomic, strong) AVPlayer * player;
 @property(nonatomic, strong) ZJSimpleEditor * editor;
 @property(nonatomic, strong) NSMutableArray * localPaths;
 @property(nonatomic, strong) NSMutableArray * clips;
+
+@property(nonatomic, strong) OperatioCrossingEffectView * bottomView;
+
 @end
 
 @implementation ViewController
@@ -71,6 +74,11 @@
     
     [self.view addSubview:view];
 
+    self.bottomView = [[OperatioCrossingEffectView alloc]initWithFrame:CGRectMake(0, kScreenHeight-300, KScreenWidth, 300)];
+    self.bottomView.delegate = self;
+    [self.view addSubview:self.bottomView];
+    
+
     dispatch_group_t dispatchGroup = dispatch_group_create();
     NSArray *assetKeysToLoadAndTest = @[@"tracks", @"duration", @"composable"];
 
@@ -82,22 +90,13 @@
         [self play];
         [self expoerAction];
     });
-
 }
 
 - (void)play{
     self.editor = [[ZJSimpleEditor alloc]init];
     self.editor.clips = self.clips;
-    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(20, 1), CMTimeMakeWithSeconds(5, 1))]];
+    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(12, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(15, 1), CMTimeMakeWithSeconds(3, 1))]];
     self.editor.transitionDuration = CMTimeMakeWithSeconds(1, 30);
-
-    self.editor.transitionTypes = (NSMutableArray *)@[@(kTransitionTypeCropRectangle),@(kTransitionTypePushHorizontalFromRight),@(kTransitionTypePushHorizontalFromLeft)];
-    
-    [self.editor buildCompositionObjectsForPlayback];
-    
-    [self.player replaceCurrentItemWithPlayerItem:self.editor.playerItem];
-    
-    [self.player play];
     
 }
 - (void)expoerAction{
@@ -149,4 +148,23 @@
     }];
 }
 
+#pragma mark - OperatioCrossingEffectViewDelegate
+- (void)operatioCrossingEffectView:(NSInteger)index model:(ZJTransitionModel*)model{
+    NSLog(@"%ld",(long)index);
+    
+    self.editor.transitionTypes = (NSMutableArray *)@[@(index),@(index)];
+    
+    [self.editor buildCompositionObjectsForPlayback];
+    
+    [self.player pause];
+    
+    [self.player replaceCurrentItemWithPlayerItem:self.editor.playerItem];
+    
+    [self.player play];
+    
+}
+
+- (void)dismissOperatioCrossingEffectView:(OperatioCrossingEffectView *)operatioCrossingEffectView{
+    
+}
 @end

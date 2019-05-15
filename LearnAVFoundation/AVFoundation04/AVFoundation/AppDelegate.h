@@ -18,3 +18,13 @@
 /**
  转场栗子
  */
+
+/**
+ 
+ CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx,CGFloat ty)//相对平移 (左上角为相对移动的(0,0)点)
+ CGAffineTransform CGAffineTransformMakeScale(CGFloat sx, CGFloat sy)缩放
+ CGAffineTransform CGAffineTransformScale(CGAffineTransform t, CGFloat sx, CGFloat sy)
+ CGAffineTransform CGAffineTransformRotate(CGAffineTransform t, CGFloat angle)
+ CGAffineTransform CGAffineTransformMakeRotation(CGFloat angle)
+ 
+ **/

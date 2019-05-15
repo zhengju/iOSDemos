@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55B32CE8E6576DC45E54184B /* libPods-AVFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E348F1C2B4052A43D7B36F94 /* libPods-AVFoundation.a */; };
+		7A613A26228BF4C5008595E7 /* OperatioCrossingEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A613A25228BF4C5008595E7 /* OperatioCrossingEffectView.m */; };
+		7A613A29228BF4D3008595E7 /* ZJTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A613A28228BF4D3008595E7 /* ZJTransitionModel.m */; };
+		7A613A2C228BF4FB008595E7 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A613A2A228BF4FB008595E7 /* UIView+Frame.m */; };
 		7A9B65AF22815EEF00C278AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B65AE22815EEF00C278AB /* AppDelegate.m */; };
 		7A9B65B222815EEF00C278AB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B65B122815EEF00C278AB /* ViewController.m */; };
 		7A9B65B522815EEF00C278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9B65B322815EEF00C278AB /* Main.storyboard */; };
@@ -18,6 +22,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EA5BE9F33DA664B6F8F7866 /* Pods-AVFoundation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation.release.xcconfig"; path = "Pods/Target Support Files/Pods-AVFoundation/Pods-AVFoundation.release.xcconfig"; sourceTree = "<group>"; };
+		7A308D65228BF62400CCDED0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7A613A24228BF4C5008595E7 /* OperatioCrossingEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperatioCrossingEffectView.h; sourceTree = "<group>"; };
+		7A613A25228BF4C5008595E7 /* OperatioCrossingEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperatioCrossingEffectView.m; sourceTree = "<group>"; };
+		7A613A27228BF4D3008595E7 /* ZJTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJTransitionModel.h; sourceTree = "<group>"; };
+		7A613A28228BF4D3008595E7 /* ZJTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJTransitionModel.m; sourceTree = "<group>"; };
+		7A613A2A228BF4FB008595E7 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		7A613A2B228BF4FB008595E7 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		7A9B65AA22815EEF00C278AB /* AVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B65AD22815EEF00C278AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A9B65AE22815EEF00C278AB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -31,6 +43,8 @@
 		7A9B65C422815F4200C278AB /* 良品铺子.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "良品铺子.mp4"; path = "../../Resources/良品铺子.mp4"; sourceTree = "<group>"; };
 		7A9B65ED22842BD200C278AB /* ZJSimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSimpleEditor.h; sourceTree = "<group>"; };
 		7A9B65EE22842BD300C278AB /* ZJSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSimpleEditor.m; sourceTree = "<group>"; };
+		A73D09651540E2F5F2B2E8D7 /* Pods-AVFoundation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AVFoundation/Pods-AVFoundation.debug.xcconfig"; sourceTree = "<group>"; };
+		E348F1C2B4052A43D7B36F94 /* libPods-AVFoundation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AVFoundation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,17 +52,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B32CE8E6576DC45E54184B /* libPods-AVFoundation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40422748C39F326E7691C174 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E348F1C2B4052A43D7B36F94 /* libPods-AVFoundation.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7A9B65A122815EEF00C278AB = {
 			isa = PBXGroup;
 			children = (
 				7A9B65AC22815EEF00C278AB /* AVFoundation */,
 				7A9B65AB22815EEF00C278AB /* Products */,
+				85236FA5B2F007003DC1F786 /* Pods */,
+				40422748C39F326E7691C174 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,12 +96,28 @@
 				7A9B65B322815EEF00C278AB /* Main.storyboard */,
 				7A9B65ED22842BD200C278AB /* ZJSimpleEditor.h */,
 				7A9B65EE22842BD300C278AB /* ZJSimpleEditor.m */,
+				7A613A2B228BF4FB008595E7 /* UIView+Frame.h */,
+				7A613A2A228BF4FB008595E7 /* UIView+Frame.m */,
+				7A613A24228BF4C5008595E7 /* OperatioCrossingEffectView.h */,
+				7A613A25228BF4C5008595E7 /* OperatioCrossingEffectView.m */,
+				7A613A27228BF4D3008595E7 /* ZJTransitionModel.h */,
+				7A613A28228BF4D3008595E7 /* ZJTransitionModel.m */,
 				7A9B65B622815EF000C278AB /* Assets.xcassets */,
 				7A9B65B822815EF000C278AB /* LaunchScreen.storyboard */,
 				7A9B65BB22815EF000C278AB /* Info.plist */,
 				7A9B65BC22815EF000C278AB /* main.m */,
+				7A308D65228BF62400CCDED0 /* PrefixHeader.pch */,
 			);
 			path = AVFoundation;
+			sourceTree = "<group>";
+		};
+		85236FA5B2F007003DC1F786 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A73D09651540E2F5F2B2E8D7 /* Pods-AVFoundation.debug.xcconfig */,
+				0EA5BE9F33DA664B6F8F7866 /* Pods-AVFoundation.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +127,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7A9B65C022815EF000C278AB /* Build configuration list for PBXNativeTarget "AVFoundation" */;
 			buildPhases = (
+				3C9BADF5935D2CDBF8730856 /* [CP] Check Pods Manifest.lock */,
 				7A9B65A622815EEF00C278AB /* Sources */,
 				7A9B65A722815EEF00C278AB /* Frameworks */,
 				7A9B65A822815EEF00C278AB /* Resources */,
@@ -145,6 +187,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3C9BADF5935D2CDBF8730856 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AVFoundation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7A9B65A622815EEF00C278AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -152,7 +219,10 @@
 			files = (
 				7A9B65EF22842BD300C278AB /* ZJSimpleEditor.m in Sources */,
 				7A9B65B222815EEF00C278AB /* ViewController.m in Sources */,
+				7A613A29228BF4D3008595E7 /* ZJTransitionModel.m in Sources */,
+				7A613A2C228BF4FB008595E7 /* UIView+Frame.m in Sources */,
 				7A9B65BD22815EF000C278AB /* main.m in Sources */,
+				7A613A26228BF4C5008595E7 /* OperatioCrossingEffectView.m in Sources */,
 				7A9B65AF22815EEF00C278AB /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,10 +363,12 @@
 		};
 		7A9B65C122815EF000C278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A73D09651540E2F5F2B2E8D7 /* Pods-AVFoundation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FFNFZE3QD;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AVFoundation/PrefixHeader.pch";
 				INFOPLIST_FILE = AVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -311,10 +383,12 @@
 		};
 		7A9B65C222815EF000C278AB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EA5BE9F33DA664B6F8F7866 /* Pods-AVFoundation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FFNFZE3QD;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AVFoundation/PrefixHeader.pch";
 				INFOPLIST_FILE = AVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

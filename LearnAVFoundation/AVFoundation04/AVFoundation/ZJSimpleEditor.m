@@ -46,6 +46,10 @@
 		}
 	}
 
+    [self.compositionAudioTracks removeAllObjects];
+    [self.compositionVideoTracks removeAllObjects];
+    
+    
     for (int i = 0; i < clipsCount; i++) {
 
         [self.compositionVideoTracks addObject: [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid]];
@@ -157,15 +161,24 @@
     transitionInstruction.timeRange = transitionTimeRange;
     
     AVMutableVideoCompositionLayerInstruction *fromLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
-    
 
-    
     AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
     // Fade in the toLayer by setting a ramp from 0.0 to 1.0.
     [toLayer setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:transitionTimeRange];
 
+    
+    CGFloat videoWidth = compositionVideoTrack.naturalSize.width;
+    CGFloat videoHeight = compositionVideoTrack.naturalSize.height;
+    
     switch (transitionType)
     {
+            
+        case kTransitionTypeNone:
+        {
+            [toLayer setOpacity:1.0 atTime:kCMTimeZero];
+            transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer ,nil];
+            break;
+        }
         case kTransitionTypeCrossFade://溶解
         {
             // Fade out the fromLayer by setting a ramp from 1.0 to 0.0.
@@ -180,9 +193,6 @@
             AVMutableVideoCompositionLayerInstruction *fromLayerRightup = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
             AVMutableVideoCompositionLayerInstruction *fromLayerLeftup = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
             AVMutableVideoCompositionLayerInstruction *fromLayerLeftDown = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
-            
-            CGFloat videoWidth = compositionVideoTrack.naturalSize.width;
-            CGFloat videoHeight = compositionVideoTrack.naturalSize.height;
             
             //右下
             CGRect startRect = CGRectMake(videoWidth/2.0, videoHeight/2.0, videoWidth/2.0, videoHeight/2.0);
@@ -219,11 +229,22 @@
             
             break;
         }
+        case kTransitionTypeMiddleTransform:
+        {
+            CGAffineTransform scaleT = CGAffineTransformMakeScale(0.001, 0.001);
+            
+            CGAffineTransform transform = CGAffineTransformTranslate(scaleT, videoWidth*500,videoHeight*500);
+            
+            [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:transform timeRange:transitionTimeRange];
+            transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
+            
+            break;
+        }
         case kTransitionTypePushHorizontalFromRight:
         {
-            [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-compositionVideoTrack.naturalSize.width, 0.0) timeRange:transitionTimeRange];
+            [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-videoWidth, 0) timeRange:transitionTimeRange];
             
-            [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(compositionVideoTrack.naturalSize.width, 0.0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+            [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(videoWidth, 0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
              transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             
             break;

@@ -244,8 +244,50 @@
         {
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-videoWidth, 0) timeRange:transitionTimeRange];
             
+
+
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(videoWidth, 0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+            
              transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
+            
+            break;
+        }
+            
+        case kTransitionTypeLeftAndRightToMiddleTransform:
+        {
+
+            
+            [fromLayer setOpacityRampFromStartOpacity:1.0 toEndOpacity:0.0 timeRange:transitionTimeRange];
+            
+            AVMutableVideoCompositionLayerInstruction *toLayerLeft = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+            AVMutableVideoCompositionLayerInstruction *toLayerRight = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+            
+          
+            [toLayerLeft setCropRectangle:CGRectMake(0, 0, videoWidth/2.0, videoHeight) atTime:kCMTimeZero];
+            [toLayerLeft setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(-videoWidth/2.0, 0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+
+            [toLayerRight setCropRectangle:CGRectMake(videoWidth/2.0, 0, videoWidth/2.0, videoHeight) atTime:kCMTimeZero];
+            [toLayerRight setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(videoWidth/2.0, 0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+            
+           transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayerRight,toLayerLeft, fromLayer, nil];
+            break;
+        }
+        case kTransitionTypeUpAndDownToMiddleTransform:
+        {
+            
+            
+            [fromLayer setOpacityRampFromStartOpacity:1.0 toEndOpacity:0.0 timeRange:transitionTimeRange];
+            
+            AVMutableVideoCompositionLayerInstruction *toLayerUp = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+            AVMutableVideoCompositionLayerInstruction *toLayerDown = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+            
+            [toLayerUp setCropRectangle:CGRectMake(0, 0, videoWidth, videoHeight/2.0) atTime:kCMTimeZero];
+            [toLayerUp setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, -videoHeight/2.0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+            
+            [toLayerDown setCropRectangle:CGRectMake(0.0, videoHeight/2.0, videoWidth, videoHeight/2.0) atTime:kCMTimeZero];
+            [toLayerDown setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, videoHeight/2.0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+            
+            transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayerUp,toLayerDown, fromLayer, nil];
             
             break;
         }

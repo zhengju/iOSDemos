@@ -95,7 +95,7 @@
 - (void)play{
     self.editor = [[ZJSimpleEditor alloc]init];
     self.editor.clips = self.clips;
-    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(12, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(15, 1), CMTimeMakeWithSeconds(3, 1))]];
+    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(35, 1), CMTimeMakeWithSeconds(3, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(18, 1), CMTimeMakeWithSeconds(3, 1))]];
     self.editor.transitionDuration = CMTimeMakeWithSeconds(1, 30);
     
 }

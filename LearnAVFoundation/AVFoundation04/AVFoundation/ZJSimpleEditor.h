@@ -15,9 +15,10 @@ typedef NS_ENUM(NSInteger, TransitionType)
     kTransitionTypeCrossFade,//溶解
     kTransitionTypeCropRectangle,//向四角擦除
     kTransitionTypeMiddleTransform,//从四边向中间消失
+    kTransitionTypeLeftAndRightToMiddleTransform,//左右到中间合成
+    kTransitionTypeUpAndDownToMiddleTransform,//上下到中间合成
     kTransitionTypeFadeInAndFadeOut,//淡入淡出
 };
-
 
 @interface ZJSimpleEditor : NSObject
 

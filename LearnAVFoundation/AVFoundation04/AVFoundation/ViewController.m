@@ -88,10 +88,10 @@
 - (void)play{
     self.editor = [[ZJSimpleEditor alloc]init];
     self.editor.clips = self.clips;
-    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(10, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(20, 1), CMTimeMakeWithSeconds(5, 1))]];
+    self.editor.clipTimeRanges = @[[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(5, 1), CMTimeMakeWithSeconds(5, 1))],[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(20, 1), CMTimeMakeWithSeconds(5, 1))]];
     self.editor.transitionDuration = CMTimeMakeWithSeconds(1, 30);
 
-    self.editor.transitionTypes = (NSMutableArray *)@[@(kTransitionTypePushHorizontalSpinFromRight),@(kTransitionTypePushHorizontalFromRight),@(kTransitionTypePushHorizontalFromLeft)];
+    self.editor.transitionTypes = (NSMutableArray *)@[@(kTransitionTypeCropRectangle),@(kTransitionTypePushHorizontalFromRight),@(kTransitionTypePushHorizontalFromLeft)];
     
     [self.editor buildCompositionObjectsForPlayback];
     

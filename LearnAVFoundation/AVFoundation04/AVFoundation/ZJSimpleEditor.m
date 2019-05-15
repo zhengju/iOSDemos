@@ -155,7 +155,11 @@
     
     AVMutableVideoCompositionInstruction *transitionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     transitionInstruction.timeRange = transitionTimeRange;
+    
     AVMutableVideoCompositionLayerInstruction *fromLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
+    
+
+    
     AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
     // Fade in the toLayer by setting a ramp from 0.0 to 1.0.
     [toLayer setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:transitionTimeRange];
@@ -166,20 +170,43 @@
         {
             // Fade out the fromLayer by setting a ramp from 1.0 to 0.0.
             [fromLayer setOpacityRampFromStartOpacity:1.0 toEndOpacity:0.0 timeRange:transitionTimeRange];
-            
+            transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             break;
         }
         case kTransitionTypeCropRectangle:
         {
 
+            
+            AVMutableVideoCompositionLayerInstruction *fromLayerRightup = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
+            AVMutableVideoCompositionLayerInstruction *fromLayerLeftup = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
+            AVMutableVideoCompositionLayerInstruction *fromLayerLeftDown = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
+            
             CGFloat videoWidth = compositionVideoTrack.naturalSize.width;
             CGFloat videoHeight = compositionVideoTrack.naturalSize.height;
             
-            CGRect startRect = CGRectMake(0.0f, 0.0f, videoWidth, videoHeight);
+            //右下
+            CGRect startRect = CGRectMake(videoWidth/2.0, videoHeight/2.0, videoWidth/2.0, videoHeight/2.0);
             CGRect endRect = CGRectMake(videoWidth, videoHeight, 0.0f, 0.0f);
             //通过裁剪实现擦除
             [fromLayer setCropRectangleRampFromStartCropRectangle:startRect toEndCropRectangle:endRect timeRange:transitionTimeRange];
-
+            //右上
+            startRect = CGRectMake(videoWidth/2.0, 0, videoWidth/2.0, videoHeight/2.0);
+            endRect = CGRectMake(videoWidth, 0.0f, 0.0f, 0.0f);
+            //通过裁剪实现擦除
+            [fromLayerRightup setCropRectangleRampFromStartCropRectangle:startRect toEndCropRectangle:endRect timeRange:transitionTimeRange];
+            //左上
+            startRect = CGRectMake(0, 0, videoWidth/2.0, videoHeight/2.0);
+            endRect = CGRectZero;
+            //通过裁剪实现擦除
+            [fromLayerLeftup setCropRectangleRampFromStartCropRectangle:startRect toEndCropRectangle:endRect timeRange:transitionTimeRange];
+            //左上
+            startRect = CGRectMake(0, videoHeight/2.0, videoWidth/2.0, videoHeight/2.0);
+            endRect = CGRectMake(0, videoHeight, 0.0f, 0.0f);
+            //通过裁剪实现擦除
+            [fromLayerLeftDown setCropRectangleRampFromStartCropRectangle:startRect toEndCropRectangle:endRect timeRange:transitionTimeRange];
+            
+             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer,fromLayerRightup,fromLayerLeftup,fromLayerLeftDown, nil];
+            
             break;
         }
         case kTransitionTypePushHorizontalSpinFromRight:
@@ -188,6 +215,7 @@
             CGAffineTransform rotateT = CGAffineTransformMakeRotation(M_PI);
             CGAffineTransform transform = CGAffineTransformTranslate(CGAffineTransformConcat(scaleT, rotateT), 1, 1);
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:transform timeRange:transitionTimeRange];
+             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             
             break;
         }
@@ -196,7 +224,7 @@
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-compositionVideoTrack.naturalSize.width, 0.0) timeRange:transitionTimeRange];
             
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(compositionVideoTrack.naturalSize.width, 0.0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
-            
+             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             
             break;
         }
@@ -205,7 +233,7 @@
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(compositionVideoTrack.naturalSize.width, 0.0) timeRange:transitionTimeRange];
             
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(-compositionVideoTrack.naturalSize.width, 0.0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
-            
+             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             break;
         }
         case kTransitionTypePushVerticalFromBottom:
@@ -213,7 +241,7 @@
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(0, -compositionVideoTrack.naturalSize.height) timeRange:transitionTimeRange];
             
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, +compositionVideoTrack.naturalSize.height) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
-            
+             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             break;
         }
         case kTransitionTypePushVerticalFromTop:
@@ -222,13 +250,15 @@
             
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, -compositionVideoTrack.naturalSize.height) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
             
+                transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
+            
             break;
         }
         default:
             break;
     }
 
-    transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
+
     return transitionInstruction;
 }
 

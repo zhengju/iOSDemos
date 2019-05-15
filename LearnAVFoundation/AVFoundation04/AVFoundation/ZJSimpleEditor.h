@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, TransitionType)
     kTransitionTypePushVerticalFromBottom,
     kTransitionTypePushVerticalFromTop,
     kTransitionTypeCrossFade,//溶解
-    kTransitionTypeCropRectangle,//擦除
+    kTransitionTypeCropRectangle,//向四角擦除
     kTransitionTypeFadeInAndFadeOut,//淡入淡出
 };
 

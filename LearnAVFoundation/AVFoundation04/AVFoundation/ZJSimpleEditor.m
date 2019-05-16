@@ -110,7 +110,7 @@
 
 		AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
 		passThroughInstruction.timeRange = passThroughTimeRanges[i];
-		AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:self.compositionVideoTracks[i]];
+		AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:self.compositionVideoTracks[i]];//由track轨道初始化layer层对象
 		
 		passThroughInstruction.layerInstructions = [NSArray arrayWithObject:passThroughLayer];
 		[instructions addObject:passThroughInstruction];
@@ -160,9 +160,9 @@
     AVMutableVideoCompositionInstruction *transitionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     transitionInstruction.timeRange = transitionTimeRange;
     
-    AVMutableVideoCompositionLayerInstruction *fromLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];
+    AVMutableVideoCompositionLayerInstruction *fromLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTrack];//当前视频track
 
-    AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+    AVMutableVideoCompositionLayerInstruction *toLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];//下一个视频track
     // Fade in the toLayer by setting a ramp from 0.0 to 1.0.
     [toLayer setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:transitionTimeRange];
 
@@ -232,9 +232,7 @@
         case kTransitionTypeMiddleTransform:
         {
             CGAffineTransform scaleT = CGAffineTransformMakeScale(0.001, 0.001);
-            
             CGAffineTransform transform = CGAffineTransformTranslate(scaleT, videoWidth*500,videoHeight*500);
-            
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:transform timeRange:transitionTimeRange];
             transitionInstruction.layerInstructions = [NSArray arrayWithObjects:toLayer, fromLayer, nil];
             
@@ -243,8 +241,6 @@
         case kTransitionTypePushHorizontalFromRight:
         {
             [fromLayer setTransformRampFromStartTransform:CGAffineTransformIdentity toEndTransform:CGAffineTransformMakeTranslation(-videoWidth, 0) timeRange:transitionTimeRange];
-            
-
 
             [toLayer setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(videoWidth, 0) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
             

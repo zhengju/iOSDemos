@@ -88,7 +88,7 @@
     dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
         
         [self play];
-        [self expoerAction];
+        
     });
 }
 
@@ -109,7 +109,7 @@
     unlink([myPathDocs UTF8String]);
     NSURL* videoUrl = [NSURL fileURLWithPath:myPathDocs];
     
-    AVAssetExportSession * exporter = [[AVAssetExportSession alloc]initWithAsset:self.editor.composition presetName:AVAssetExportPresetLowQuality];
+    AVAssetExportSession * exporter = [[AVAssetExportSession alloc]initWithAsset:self.editor.composition presetName:AVAssetExportPreset640x480];
     exporter.outputURL=videoUrl;
     exporter.outputFileType = AVFileTypeMPEG4;
     exporter.shouldOptimizeForNetworkUse = YES;
@@ -161,7 +161,8 @@
     [self.player replaceCurrentItemWithPlayerItem:self.editor.playerItem];
     
     [self.player play];
-    
+
+    [self expoerAction];
 }
 
 - (void)dismissOperatioCrossingEffectView:(OperatioCrossingEffectView *)operatioCrossingEffectView{

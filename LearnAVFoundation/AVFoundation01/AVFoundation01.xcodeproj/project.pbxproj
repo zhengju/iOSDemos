@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A308D81228D529800CCDED0 /* ZJWriterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A308D80228D529800CCDED0 /* ZJWriterManager.m */; };
 		7A724B6022641E680048DF70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A724B5F22641E680048DF70 /* AppDelegate.m */; };
 		7A724B6322641E680048DF70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A724B6222641E680048DF70 /* ViewController.m */; };
 		7A724B6622641E680048DF70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A724B6422641E680048DF70 /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A308D7F228D529800CCDED0 /* ZJWriterManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJWriterManager.h; sourceTree = "<group>"; };
+		7A308D80228D529800CCDED0 /* ZJWriterManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJWriterManager.m; sourceTree = "<group>"; };
 		7A724B5B22641E680048DF70 /* AVFoundation01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVFoundation01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A724B5E22641E680048DF70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A724B5F22641E680048DF70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 				7A724B5F22641E680048DF70 /* AppDelegate.m */,
 				7A724B6122641E680048DF70 /* ViewController.h */,
 				7A724B6222641E680048DF70 /* ViewController.m */,
+				7A308D7F228D529800CCDED0 /* ZJWriterManager.h */,
+				7A308D80228D529800CCDED0 /* ZJWriterManager.m */,
 				7A724B6422641E680048DF70 /* Main.storyboard */,
 				7A724B6722641E690048DF70 /* Assets.xcassets */,
 				7A724B6922641E690048DF70 /* LaunchScreen.storyboard */,
@@ -153,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A308D81228D529800CCDED0 /* ZJWriterManager.m in Sources */,
 				7A724B6322641E680048DF70 /* ViewController.m in Sources */,
 				7A724B6E22641E690048DF70 /* main.m in Sources */,
 				7A724B6022641E680048DF70 /* AppDelegate.m in Sources */,

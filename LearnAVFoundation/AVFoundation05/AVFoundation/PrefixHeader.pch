@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  AVFoundation
+//
+//  Created by leeco on 2019/5/15.
+//  Copyright © 2019 zsw. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "BlocksKit/BlocksKit.h"
+#import "UIControl+BlocksKit.h"
+#import "Masonry.h"
+#import "UIView+Frame.h"
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define WeakObj(o) __weak typeof(o) o##Weak = o;
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+#define mainColor RGBACOLOR(108, 188, 252, 1)//主色调 淡蓝色 蓝色字体
+#endif /* PrefixHeader_pch */

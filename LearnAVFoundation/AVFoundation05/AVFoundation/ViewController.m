@@ -30,17 +30,18 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         UIButton * playBtn = [[UIButton alloc]init];
-        [playBtn setBackgroundColor:[UIColor redColor]];
         [self addSubview:playBtn];
         [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.with.height.mas_equalTo(45);
             make.center.mas_equalTo(self);
         }];
+        [playBtn setImage:[UIImage imageNamed:@"暂停"] forState:UIControlStateNormal];
+        [playBtn setImage:[UIImage imageNamed:@"播放"] forState:UIControlStateSelected];
         WeakObj(self)
         [playBtn bk_addEventHandler:^(id sender) {
             playBtn.selected = !playBtn.selected;
-            if ([self.delegate respondsToSelector:@selector(playerView:playOrPause:)]) {
-                [self.delegate playerView:self playOrPause:playBtn.selected];
+            if ([selfWeak.delegate respondsToSelector:@selector(playerView:playOrPause:)]) {
+                [selfWeak.delegate playerView:selfWeak playOrPause:playBtn.selected];
             }
         } forControlEvents:UIControlEventTouchUpInside];
     }
@@ -103,9 +104,8 @@
 - (void)sliderAction:(UISlider*)slider{
     NSLog(@"%f",slider.value);
     CMTimeShow(self.playerItem.currentTime);
-    [self.player seekToTime:CMTimeMakeWithSeconds(slider.value, 30) completionHandler:^(BOOL finished) {
-        
-    }];
+    CMTimeShow(CMTimeMakeWithSeconds(slider.value, self.asset.duration.timescale));
+    [self.player seekToTime:CMTimeMakeWithSeconds(slider.value, self.asset.duration.timescale)];
 }
 - (void)configurePlayer{
     NSString * path = [[NSBundle mainBundle]pathForResource:@"良品铺子" ofType:@"mp4"];
@@ -113,21 +113,17 @@
     self.videoFilePath =  [NSURL fileURLWithPath:path];
 
     self.asset = [AVURLAsset assetWithURL:self.videoFilePath];
-    
-    self.playerItem = [[AVPlayerItem alloc]initWithAsset:self.asset];
-    
-    self.player = [[AVPlayer alloc]init];
-
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    CMTimeShow(self.asset.duration);
+    self.playerItem = [AVPlayerItem playerItemWithAsset:self.asset];
+    CMTimeShow(self.playerItem.duration);
+    CMTimeShow(self.playerItem.currentTime);
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     
     self.playerDisplayview = [[PlayerView alloc]initWithFrame:CGRectMake(0, 88, KScreenWidth, 300)];
     self.playerDisplayview.delegate = self;
     self.playerDisplayview.player = self.player;
-    
-//    [self.player play];
-    
+
     [self.view addSubview:self.playerDisplayview];
-    
 }
 - (void)configureChoiceBtn{
     UIButton * choiceBtn = [[UIButton alloc]init];
@@ -148,7 +144,6 @@
     CZHChooseCoverController *chooseCover = [[CZHChooseCoverController alloc] init];
     chooseCover.videoPath = self.videoFilePath;
     chooseCover.coverImageBlock = ^(UIImage *coverImage) {
-        
         [[NSFileManager defaultManager] removeItemAtPath:self.filePath.path error:NULL];
         [self.writer.images addObject:coverImage];
         [self.writer writeVideoSize:CGSizeMake(1280, 720) path:self.filePath success:^() {
@@ -186,15 +181,20 @@
 
         VideoAudioCompositionManager * manager = [[VideoAudioCompositionManager alloc]init];
         
-        [manager compositionAssets:self.clips Path:filePath success:^(NSURL * _Nullable fileUrl) {
-
+        [manager compositionAssets:self.clips Path:filePath progress:^(CGFloat progress) {
+           
+            [SVProgressHUD showProgress:progress];
+            
+        } success:^(NSURL * _Nullable fileUrl) {
+ 
+            [SVProgressHUD dismiss];
            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.asset = [AVURLAsset assetWithURL:filePath];
-
+                CMTimeShow(self.asset.duration);
                 self.playerItem = [[AVPlayerItem alloc]initWithAsset:self.asset];
-
+                CMTimeShow(self.playerItem.currentTime);
                 [self.player  replaceCurrentItemWithPlayerItem:self.playerItem];
 
                 [self.player pause];

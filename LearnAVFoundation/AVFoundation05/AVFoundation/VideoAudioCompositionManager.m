@@ -9,7 +9,11 @@
 #import "VideoAudioCompositionManager.h"
 
 @implementation VideoAudioCompositionManager
-- (void)compositionAssets:(NSArray<AVURLAsset*>*)assets Path:(NSURL*)path success:(SuccessBlcok)successBlcok{
+- (void)compositionAssets:(NSArray<AVURLAsset*>*)assets
+                     Path:(NSURL*)path
+                 progress:(CompositionProgress)progressBlock
+                  success:(SuccessBlcok)successBlcok
+{
 
     AVMutableComposition *composition = [AVMutableComposition composition];
     // 视频通道
@@ -34,11 +38,12 @@
         
         atTime = CMTimeAdd(atTime, timeRange.duration);
     }
-      [self composition:composition storePath:path success:successBlcok];
+      [self composition:composition storePath:path progress:progressBlock success:successBlcok];
 }
 //输出
 - (void)composition:(AVMutableComposition *)avComposition
           storePath:(NSURL *)storePath
+            progress:(CompositionProgress)progressBlock
             success:(SuccessBlcok)successBlcok
 {
     // 创建一个输出
@@ -53,9 +58,9 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.05 repeats:YES block:^(NSTimer * _Nonnull timer) {
         NSLog(@" 打印信息:%f",assetExport.progress);
-//        if (self.progressBlock) {
-//            self.progressBlock(assetExport.progress);
-//        }
+        if (progressBlock) {
+            progressBlock(assetExport.progress);
+        }
     }];
     // 合成完毕
     [assetExport exportAsynchronouslyWithCompletionHandler:^{

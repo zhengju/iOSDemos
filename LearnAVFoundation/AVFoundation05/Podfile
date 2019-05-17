@@ -1,5 +1,6 @@
 target "AVFoundation" do
-
+    
+    pod 'SVProgressHUD'
     pod 'Masonry'
     pod 'BlocksKit', '~> 2.2.5'
     

@@ -38,7 +38,8 @@ typedef  void(^CompleteBlock)(UIImage * _Nullable image,NSError * _Nullable erro
 
 
 
-- (void)compositionAssets:(NSArray<AVURLAsset*>*)assets Path:(NSURL*)path success:(SuccessBlcok)successBlcok;
+- (void)compositionAssets:(NSArray<AVURLAsset*>*)assets Path:(NSURL*)path progress:(CompositionProgress)progressBlock success:(SuccessBlcok)successBlcok;
+
 @end
 
 NS_ASSUME_NONNULL_END

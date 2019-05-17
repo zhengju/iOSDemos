@@ -184,7 +184,7 @@ static NSString *const ID = @"CZHChooseCoverCell";
     
     generator.requestedTimeToleranceAfter = kCMTimeZero;
     generator.requestedTimeToleranceBefore = kCMTimeZero;
-    
+    CMTimeShow(CMTimeMake(time, self.timeScale));
     NSError *error = nil;
     CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(time, self.timeScale) actualTime:NULL error:&error];
     {

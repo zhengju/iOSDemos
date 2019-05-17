@@ -16,6 +16,8 @@
 #import "UIControl+BlocksKit.h"
 #import "Masonry.h"
 #import "UIView+Frame.h"
+#import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define WeakObj(o) __weak typeof(o) o##Weak = o;

@@ -60,7 +60,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-    NSString * path = [[NSBundle mainBundle]pathForResource:@"良品铺子" ofType:@"mp4"];
+    NSString * path = [[NSBundle mainBundle]pathForResource:@"IMG_0067" ofType:@"mp4"];
     
     self.asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
     

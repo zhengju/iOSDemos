@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, TransitionType)
     kTransitionTypeLeftAndRightToMiddleTransform,//左右到中间合成
     kTransitionTypeUpAndDownToMiddleTransform,//上下到中间合成
     kTransitionTypeLeftAndRightToMiddleInUpDownTransform,//上下各一半左右到中间合成
+    kTransitionTypeMultiLeftRightToMiddleInUpDownTransform,//上下多个条，左右到中间合成
     kTransitionTypeUpAndDownToMiddleInLeftRightTransform,//左右各一半上下到中间合成
     kTransitionTypeUpDownLeftAndRightToMiddleTransform,//上下左右角到中间合成
     kTransitionTypeFadeInAndFadeOut,//淡入淡出

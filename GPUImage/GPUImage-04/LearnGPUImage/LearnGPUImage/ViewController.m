@@ -50,19 +50,6 @@
     [displayCropFilter setDrawRect:CGRectMake(0, 0, 1, 1)];//设置渲染区域
     [cropFilter addTarget:displayCropFilter];
     
-//
-//    GPUImageNormalBlendFilter * blendFilter = [[GPUImageNormalBlendFilter alloc]init];
-//    //两个分屏
-//    ZJDisplayCropFilter * displayCropFilter0 = [[ZJDisplayCropFilter alloc]init];
-//    [displayCropFilter0 setDrawRect:CGRectMake(0, 0, 1, 0.5)];//设置渲染区域
-//    [cropFilter addTarget:displayCropFilter0];
-//    ZJDisplayCropFilter * displayCropFilter1 = [[ZJDisplayCropFilter alloc]init];
-//    [displayCropFilter1 setDrawRect:CGRectMake(0, 0.5, 1, 1)];//设置渲染区域
-//    [cropFilter addTarget:displayCropFilter1];
-//    [displayCropFilter0 addTarget:blendFilter];
-//    [displayCropFilter1 addTarget:blendFilter];
-
-    
     for (int indexRow = 0; indexRow < MaxRow; ++indexRow) {
         for (int indexColumn = 0; indexColumn < MaxColumn; ++indexColumn) {
             CGRect frame = CGRectMake(indexColumn * 1.0 / MaxColumn,

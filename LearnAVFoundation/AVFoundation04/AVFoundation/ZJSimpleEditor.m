@@ -281,11 +281,11 @@
              **/
             [fromLayer setOpacityRampFromStartOpacity:1.0 toEndOpacity:0.0 timeRange:transitionTimeRange];
             
-            AVMutableVideoCompositionLayerInstruction *toLayerRight1 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
-            AVMutableVideoCompositionLayerInstruction *toLayerLeft1 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
-            AVMutableVideoCompositionLayerInstruction *toLayerRight2 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
-            AVMutableVideoCompositionLayerInstruction *toLayerLeft2 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
-             AVMutableVideoCompositionLayerInstruction *toLayerRight3 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
+            AVMutableVideoCompositionLayerInstruction *toLayerRight1 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];///<---R
+            AVMutableVideoCompositionLayerInstruction *toLayerLeft1 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];///L--->
+            AVMutableVideoCompositionLayerInstruction *toLayerRight2 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];///<---R
+            AVMutableVideoCompositionLayerInstruction *toLayerLeft2 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];///L--->
+             AVMutableVideoCompositionLayerInstruction *toLayerRight3 = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];///<---R
 
             CGFloat height = videoHeight/5.0;
             
@@ -332,8 +332,13 @@
             AVMutableVideoCompositionLayerInstruction *toLayerUp = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
             AVMutableVideoCompositionLayerInstruction *toLayerDown = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:nextcompositionVideoTrack];
             
-            [toLayerUp setCropRectangle:CGRectMake(0, 0, videoWidth/2.0, videoHeight) atTime:kCMTimeZero];
-            [toLayerUp setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, -videoHeight) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+             [toLayerUp setTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(-1.0), 1.5, 1) atTime:kCMTimeZero];
+            [toLayerUp setCropRectangle:CGRectMake(0, 0, videoWidth/2.0, videoHeight*2) atTime:kCMTimeZero];
+            
+            [toLayerUp setTransformRampFromStartTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(-1.0), 1.5, 1) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];
+
+           
+            
             
             [toLayerDown setCropRectangle:CGRectMake(videoWidth/2.0, 0, videoWidth/2.0, videoHeight) atTime:kCMTimeZero];
             [toLayerDown setTransformRampFromStartTransform:CGAffineTransformMakeTranslation(0, videoHeight) toEndTransform:CGAffineTransformIdentity timeRange:transitionTimeRange];

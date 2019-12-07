@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182C4DF1239B735C00F5EFBF /* JTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 182C4DEF239B735B00F5EFBF /* JTimer.m */; };
 		7A42D60722548D2F00BE1690 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A42D60622548D2F00BE1690 /* AppDelegate.m */; };
 		7A42D60A22548D2F00BE1690 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A42D60922548D2F00BE1690 /* ViewController.m */; };
 		7A42D60D22548D2F00BE1690 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A42D60B22548D2F00BE1690 /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		182C4DEF239B735B00F5EFBF /* JTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTimer.m; sourceTree = "<group>"; };
+		182C4DF0239B735C00F5EFBF /* JTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTimer.h; sourceTree = "<group>"; };
 		7A42D60222548D2F00BE1690 /* NSTimerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSTimerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A42D60522548D2F00BE1690 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A42D60622548D2F00BE1690 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				7A42D60922548D2F00BE1690 /* ViewController.m */,
 				7A42D61B22548D5C00BE1690 /* DetailController.h */,
 				7A42D61C22548D5C00BE1690 /* DetailController.m */,
+				182C4DF0239B735C00F5EFBF /* JTimer.h */,
+				182C4DEF239B735B00F5EFBF /* JTimer.m */,
 				7A42D61E2254926B00BE1690 /* DetailView.h */,
 				7A42D61F2254926B00BE1690 /* DetailView.m */,
 				7A4DDE67225C747D0047B1D3 /* ZJWeakProxy.h */,
@@ -157,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A4DDE69225C747D0047B1D3 /* ZJWeakProxy.m in Sources */,
+				182C4DF1239B735C00F5EFBF /* JTimer.m in Sources */,
 				7A42D61D22548D5C00BE1690 /* DetailController.m in Sources */,
 				7A42D60A22548D2F00BE1690 /* ViewController.m in Sources */,
 				7A42D6202254926B00BE1690 /* DetailView.m in Sources */,
@@ -305,6 +311,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NSTimerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,6 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NSTimerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,14 +8,14 @@
 
 #import "DetailController.h"
 #import "DetailView.h"
-
+#import "JTimer.h"
 #import "ZJWeakProxy.h"
 
 @interface DetailController ()
 @property(nonatomic, strong) NSTimer * timer;
 
 @property(nonatomic, strong) DetailView * detailView;
-
+@property(strong,nonatomic) JTimer  * jTimer;
 @end
 
 @implementation DetailController
@@ -26,19 +26,18 @@
     self.view.backgroundColor = [UIColor redColor];
 
     
+    self.jTimer = [[JTimer alloc]initWithTarget:self block:^{
+        NSLog(@"timer 哈哈");
+    }];
     
-//    self.detailView = [[DetailView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    /**
+     self.detailView = [[DetailView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+     self.detailView.backgroundColor = [UIColor blackColor];
+     [self.view addSubview:self.detailView];
+     */
     
-    
-
-//    self.detailView.backgroundColor = [UIColor blackColor];
-//
-//    [self.view addSubview:self.detailView];
-
-    
-    self.timer = [NSTimer timerWithTimeInterval:1 target:[ZJWeakProxy proxyWithTarget:self] selector:@selector(run) userInfo:nil repeats:YES];
-
-    [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
+//    self.timer = [NSTimer timerWithTimeInterval:1 target:[ZJWeakProxy proxyWithTarget:self] selector:@selector(run) userInfo:nil repeats:YES];
+//    [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
 
 }
 - (void)run{
@@ -51,15 +50,10 @@
 }
 
 - (void)dealloc{
-    
-    NSLog(@" %@",[NSThread currentThread]);
-    
-//    self.detailView = nil;
 
-        [self.detailView.timer invalidate];
-        self.detailView.timer = nil;
+    [self.detailView.timer invalidate];
 
-    NSLog(@"---");
+    NSLog(@"detailController dealloc");
 
 }
 

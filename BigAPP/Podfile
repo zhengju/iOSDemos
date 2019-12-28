@@ -1,0 +1,26 @@
+platform :ios, '8.0'
+use_frameworks!
+
+target "BigAPP" do
+
+#    pod 'GPUImage'
+    pod 'SDWebImage', '~> 5.0.0'
+    pod 'Masonry'
+    pod 'BlocksKit', '~> 2.2.5'
+    pod 'Toast'
+    pod 'SVProgressHUD'
+    pod 'FDFullscreenPopGesture'
+    #pod 'StepSlider', '~> 1.2.1'
+    pod 'AFNetworking'
+    pod 'KMCGeigerCounter' #卡顿检测
+    #友盟系列
+    #pod 'UMCCommon'#基础库
+    #pod 'UMCAnalytics'#统计
+    #pod 'UMCPush'#Push
+    #pod 'UMCShare/UI'#Share
+   # pod 'UMCShare/Social/ReducedWeChat'#简洁版微信分享(只含分享和登录)
+   # pod 'UMCShare/Social/QQ'
+  #  pod 'UMCErrorCatch'
+    #pod 'IQKeyboardManager'
+    #pod 'Charts'
+end

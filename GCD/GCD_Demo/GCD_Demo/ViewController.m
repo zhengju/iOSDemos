@@ -166,8 +166,7 @@
     
     
     NSLog(@")))))%@",self.name);
-   
-//
+
 //    NSDictionary * dic = @{name:name};
 //
 //    [name appendString:@"123"];
@@ -179,8 +178,66 @@
 //    nameStr = @"235235";
 //    NSLog(@"2 %p",nameStr);
     
+//    [self cancelGCD];
+    [self nsoperationCancel];
     
 }
+#pragma mark - NSOperation cancel操作
+- (void)nsoperationCancel{
+    NSOperationQueue  * queue = [[NSOperationQueue alloc]init];
+    queue.maxConcurrentOperationCount = 1;
+
+    NSBlockOperation * operation1 =  [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"block1 begin");
+//        sleep(3);
+        NSLog(@"block1 end %@",[NSThread currentThread]);
+        
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            NSLog(@"main %@",[NSThread currentThread]);
+
+        }];
+    }];
+    
+    NSBlockOperation * operation2 =  [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"block2 %@",[NSThread currentThread]);
+
+    }];
+    NSBlockOperation * operation3=  [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"block3 %@",[NSThread currentThread]);
+
+    }];
+    [queue addOperation:operation1];
+    [queue addOperation:operation2];
+    [queue addOperation:operation3];
+//    [queue cancelAllOperations];//取消队列中全部未执行的操作
+    [operation2 cancel];//单个任务取消
+    
+}
+#pragma mark - 取消GCD任务
+- (void)cancelGCD{
+    dispatch_queue_t queue = dispatch_queue_create("queue", DISPATCH_QUEUE_SERIAL);//串行只开启一个线程
+    dispatch_block_t block1 = dispatch_block_create(0, ^{
+        NSLog(@"block1 begin");
+        sleep(3);
+        NSLog(@"block1 end %@",[NSThread currentThread]);
+    });
+   __block int cancel = 0;//增加变量标示来判断是否取消了任务
+    dispatch_block_t block2 = dispatch_block_create(0, ^{
+        if (cancel == 1) {
+             NSLog(@"block2 cancel");
+            return ;
+        }
+        NSLog(@"block2 %@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, block1);
+    dispatch_async(queue, block2);
+    
+//    sleep(1);
+//    dispatch_block_cancel(block2);//iOS 8之后新方法可以取消未执行的任务
+//    cancel = 1;
+    
+}
+
 - (void)methodA{
     [self methodA:^{
         [self methodB];

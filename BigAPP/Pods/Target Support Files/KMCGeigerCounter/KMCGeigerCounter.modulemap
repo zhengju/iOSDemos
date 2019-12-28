@@ -1,0 +1,6 @@
+framework module KMCGeigerCounter {
+  umbrella header "KMCGeigerCounter-umbrella.h"
+
+  export *
+  module * { export * }
+}

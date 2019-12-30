@@ -21,6 +21,11 @@
 		185BF34E23B4EE1800C8224F /* ModuleB.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF34D23B4EE1800C8224F /* ModuleB.m */; };
 		185BF35123B4EF4F00C8224F /* TaskController+ModuleB.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF35023B4EF4F00C8224F /* TaskController+ModuleB.m */; };
 		185BF35423B4F12F00C8224F /* TaskController+ModuleA.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF35323B4F12F00C8224F /* TaskController+ModuleA.m */; };
+		185BF38C23B982E600C8224F /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF38A23B982E600C8224F /* LoginController.m */; };
+		185BF38D23B982E600C8224F /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185BF38B23B982E600C8224F /* LoginController.xib */; };
+		185BF39023B98A9900C8224F /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF38F23B98A9900C8224F /* LoginViewModel.m */; };
+		18B1472023B9FF2800462D68 /* FrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1471F23B9FF2800462D68 /* FrendsController.swift */; };
+		18B1472323BA029A00462D68 /* VCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1472223BA029A00462D68 /* VCModel.m */; };
 		2DE934C74CD745C16EAED0AC /* Pods_BigAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +57,15 @@
 		185BF35023B4EF4F00C8224F /* TaskController+ModuleB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TaskController+ModuleB.m"; sourceTree = "<group>"; };
 		185BF35223B4F12F00C8224F /* TaskController+ModuleA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaskController+ModuleA.h"; sourceTree = "<group>"; };
 		185BF35323B4F12F00C8224F /* TaskController+ModuleA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TaskController+ModuleA.m"; sourceTree = "<group>"; };
+		185BF38923B982E600C8224F /* LoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		185BF38A23B982E600C8224F /* LoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		185BF38B23B982E600C8224F /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginController.xib; sourceTree = "<group>"; };
+		185BF38E23B98A9900C8224F /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
+		185BF38F23B98A9900C8224F /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
+		18B1471C23B9FEEB00462D68 /* BigAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigAPP-Bridging-Header.h"; sourceTree = "<group>"; };
+		18B1471F23B9FF2800462D68 /* FrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrendsController.swift; sourceTree = "<group>"; };
+		18B1472123BA029A00462D68 /* VCModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCModel.h; sourceTree = "<group>"; };
+		18B1472223BA029A00462D68 /* VCModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCModel.m; sourceTree = "<group>"; };
 		2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1FB54E9ABC03060B59BC43A /* Pods-BigAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.release.xcconfig"; sourceTree = "<group>"; };
 		D88B9B280336B85DF0BB8481 /* Pods-BigAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,6 +94,7 @@
 		182239C623AD03A700AE2E6D = {
 			isa = PBXGroup;
 			children = (
+				18B1471B23B9FEB400462D68 /* Swift */,
 				182239D123AD03A700AE2E6D /* BigAPP */,
 				182239D023AD03A700AE2E6D /* Products */,
 				A3825032C1394A84CD6DEACA /* Pods */,
@@ -98,6 +113,7 @@
 		182239D123AD03A700AE2E6D /* BigAPP */ = {
 			isa = PBXGroup;
 			children = (
+				185BF38823B982C600C8224F /* 登录模块 */,
 				182239D223AD03A700AE2E6D /* AppDelegate.h */,
 				182239D323AD03A700AE2E6D /* AppDelegate.m */,
 				182239D523AD03A700AE2E6D /* SceneDelegate.h */,
@@ -106,8 +122,8 @@
 				182239D923AD03A700AE2E6D /* ViewController.m */,
 				185BF33123AD0D7000C8224F /* VCCell.h */,
 				185BF33223AD0D7000C8224F /* VCCell.m */,
-				185BF34B23B4EDFE00C8224F /* 模块2 */,
-				185BF34423B4ECEA00C8224F /* 模块1 */,
+				18B1472123BA029A00462D68 /* VCModel.h */,
+				18B1472223BA029A00462D68 /* VCModel.m */,
 				185BF33C23B4EA8600C8224F /* 任务中心 */,
 				182239DB23AD03A700AE2E6D /* Main.storyboard */,
 				182239DE23AD03A800AE2E6D /* Assets.xcassets */,
@@ -121,8 +137,10 @@
 		185BF33C23B4EA8600C8224F /* 任务中心 */ = {
 			isa = PBXGroup;
 			children = (
-				185BF33D23B4EAA100C8224F /* TaskController.h */,
+				185BF34B23B4EDFE00C8224F /* 模块2 */,
+				185BF34423B4ECEA00C8224F /* 模块1 */,
 				185BF33E23B4EAA100C8224F /* TaskController.m */,
+				185BF33D23B4EAA100C8224F /* TaskController.h */,
 				185BF34023B4EC7000C8224F /* TaskManager.h */,
 				185BF34123B4EC7000C8224F /* TaskManager.m */,
 				185BF34823B4ED9B00C8224F /* TaskProtocol.h */,
@@ -150,6 +168,27 @@
 				185BF35023B4EF4F00C8224F /* TaskController+ModuleB.m */,
 			);
 			name = "模块2";
+			sourceTree = "<group>";
+		};
+		185BF38823B982C600C8224F /* 登录模块 */ = {
+			isa = PBXGroup;
+			children = (
+				185BF38923B982E600C8224F /* LoginController.h */,
+				185BF38A23B982E600C8224F /* LoginController.m */,
+				185BF38B23B982E600C8224F /* LoginController.xib */,
+				185BF38E23B98A9900C8224F /* LoginViewModel.h */,
+				185BF38F23B98A9900C8224F /* LoginViewModel.m */,
+			);
+			name = "登录模块";
+			sourceTree = "<group>";
+		};
+		18B1471B23B9FEB400462D68 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				18B1471C23B9FEEB00462D68 /* BigAPP-Bridging-Header.h */,
+				18B1471F23B9FF2800462D68 /* FrendsController.swift */,
+			);
+			path = Swift;
 			sourceTree = "<group>";
 		};
 		A3825032C1394A84CD6DEACA /* Pods */ = {
@@ -195,6 +234,7 @@
 				TargetAttributes = {
 					182239CE23AD03A700AE2E6D = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -222,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				182239E223AD03A800AE2E6D /* LaunchScreen.storyboard in Resources */,
+				185BF38D23B982E600C8224F /* LoginController.xib in Resources */,
 				182239DF23AD03A800AE2E6D /* Assets.xcassets in Resources */,
 				182239DD23AD03A700AE2E6D /* Main.storyboard in Resources */,
 			);
@@ -263,6 +304,7 @@
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/KMCGeigerCounter/KMCGeigerCounter.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast/Toast.framework",
@@ -276,6 +318,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMCGeigerCounter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast.framework",
@@ -316,10 +359,14 @@
 			files = (
 				185BF34E23B4EE1800C8224F /* ModuleB.m in Sources */,
 				185BF33F23B4EAA100C8224F /* TaskController.m in Sources */,
+				185BF39023B98A9900C8224F /* LoginViewModel.m in Sources */,
 				182239DA23AD03A700AE2E6D /* ViewController.m in Sources */,
 				185BF34223B4EC7000C8224F /* TaskManager.m in Sources */,
 				185BF34723B4ED6500C8224F /* ModuleA.m in Sources */,
+				185BF38C23B982E600C8224F /* LoginController.m in Sources */,
+				18B1472023B9FF2800462D68 /* FrendsController.swift in Sources */,
 				185BF35123B4EF4F00C8224F /* TaskController+ModuleB.m in Sources */,
+				18B1472323BA029A00462D68 /* VCModel.m in Sources */,
 				182239D423AD03A700AE2E6D /* AppDelegate.m in Sources */,
 				182239E523AD03A800AE2E6D /* main.m in Sources */,
 				185BF33323AD0D7000C8224F /* VCCell.m in Sources */,
@@ -465,7 +512,9 @@
 			baseConfigurationReference = D88B9B280336B85DF0BB8481 /* Pods-BigAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = BigAPP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,6 +522,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ZJ.BigAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swift/BigAPP-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -482,7 +534,9 @@
 			baseConfigurationReference = C1FB54E9ABC03060B59BC43A /* Pods-BigAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = BigAPP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -490,6 +544,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ZJ.BigAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swift/BigAPP-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

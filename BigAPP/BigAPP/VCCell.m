@@ -7,6 +7,14 @@
 //
 
 #import "VCCell.h"
+#import "VCModel.h"
+@interface VCCell()
+@property(strong,nonatomic) UILabel * titleL;
+@property(strong,nonatomic) UIImageView * icon;
+
+@property(strong,nonatomic) NSString * urlString;
+@end
+
 
 @implementation VCCell
 
@@ -14,7 +22,14 @@
     [super awakeFromNib];
     // Initialization code
 }
-
+- (void)setModel:(VCModel *)model{
+    _model = model;
+    
+      [_icon sd_setImageWithURL:[NSURL URLWithString:_model.iconURL] placeholderImage:[UIImage imageNamed:@""]];
+    
+    _titleL.text = _model.title;
+    
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style
                 reuseIdentifier:reuseIdentifier]) {
@@ -24,6 +39,10 @@
         self.icon.backgroundColor = [UIColor redColor];
         [self addSubview:self.icon];
         
+        self.titleL = [[UILabel alloc]initWithFrame:CGRectMake(105, 30, 100, 35)];
+        [self addSubview:self.titleL];
+        
+        
     }
     return self;
 }
@@ -32,9 +51,5 @@
 
     // Configure the view for the selected state
 }
-- (void)setUrlString:(NSString *)urlString{
-    
-    [_icon sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@""]];
-    
-}
+
 @end

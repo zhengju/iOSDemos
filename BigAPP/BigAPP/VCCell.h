@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/SDWebImage.h>
 NS_ASSUME_NONNULL_BEGIN
-
+@class VCModel;
 @interface VCCell : UITableViewCell
 
-@property(strong,nonatomic) UIImageView * icon;
+@property(strong,nonatomic) VCModel * model;
 
-@property(strong,nonatomic) NSString * urlString;
+
 
 @end
 

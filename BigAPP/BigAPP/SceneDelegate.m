@@ -1,5 +1,5 @@
 #import "SceneDelegate.h"
-
+#import "ViewController.h"
 @interface SceneDelegate ()
 
 @end
@@ -12,7 +12,11 @@
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     
-//    [self.window makeKeyAndVisible];
+//    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:[ViewController new]];
+//    self.window.rootViewController = nav;
+    
+    
+    [self.window makeKeyAndVisible];
     
 
 

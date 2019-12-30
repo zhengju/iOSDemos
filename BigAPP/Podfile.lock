@@ -32,6 +32,13 @@ PODS:
   - FDFullscreenPopGesture (1.1)
   - KMCGeigerCounter (0.3.0)
   - Masonry (1.1.0)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
@@ -44,6 +51,7 @@ DEPENDENCIES:
   - FDFullscreenPopGesture
   - KMCGeigerCounter
   - Masonry
+  - ReactiveCocoa (~> 2.5)
   - SDWebImage (~> 5.0.0)
   - SVProgressHUD
   - Toast
@@ -54,10 +62,11 @@ SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   KMCGeigerCounter: a06cfeed4a96e8f9a49028abb3ba7e53604d3219
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 56655af32d754b70330fd93f27b9e115f05c86db
+PODFILE CHECKSUM: d79c495b7a347a71fc0a8258ef92800102a39cc6
 
 COCOAPODS: 1.3.1

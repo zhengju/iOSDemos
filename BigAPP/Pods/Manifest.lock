@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - Aspects (1.4.1)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -47,6 +48,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Aspects
   - BlocksKit (~> 2.2.5)
   - FDFullscreenPopGesture
   - KMCGeigerCounter
@@ -58,6 +60,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   KMCGeigerCounter: a06cfeed4a96e8f9a49028abb3ba7e53604d3219
@@ -67,6 +70,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: d79c495b7a347a71fc0a8258ef92800102a39cc6
+PODFILE CHECKSUM: ed704e1d6cf09e3a5c5b771a29afd715889f417c
 
 COCOAPODS: 1.3.1

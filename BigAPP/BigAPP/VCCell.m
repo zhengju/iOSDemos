@@ -25,7 +25,7 @@
 - (void)setModel:(VCModel *)model{
     _model = model;
     
-      [_icon sd_setImageWithURL:[NSURL URLWithString:_model.iconURL] placeholderImage:[UIImage imageNamed:@""]];
+    [_icon sd_setImageWithURL:[NSURL URLWithString:_model.iconURL] placeholderImage:[UIImage imageNamed:@""]];
     
     _titleL.text = _model.title;
     

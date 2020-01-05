@@ -12,11 +12,12 @@
 #import "TaskController.h"
 #import "VCModel.h"
 #import "BigAPP-Swift.h"
-
+#import "ZJImageManager.h"
+#import "LCNetworkImageView.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "LoginController.h"
-
-
+#import "HTMLController.h"
+#import "LayerController.h"
 
 #define cellID @"cellID"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -75,7 +76,7 @@
     }];
     
     
-    NSArray * titles = @[@"任务中心",@"RAC",@"Swift"];
+    NSArray * titles = @[@"任务中心",@"RAC",@"Swift",@"WKWebView",@"layer"];
     
     for (int i = 0; i < titles.count; i++) {
         VCModel * model = [[VCModel alloc]init];
@@ -85,6 +86,15 @@
     }
     
     [self.tableView reloadData];
+    
+    
+    ZJImageManager * imageManager = [[ZJImageManager alloc]init];
+    [imageManager downloadImage];
+
+    LCNetworkImageView * view = [[LCNetworkImageView alloc]init];
+    [view loadImageWithURL:[NSURL URLWithString:@"http://img2.imgtn.bdimg.com/it/u=3344415164,12208452&fm=26&gp=0.jpg"] completed:^(BOOL isSuccess, UIImage *image) {
+
+    }];
     
     
 }
@@ -117,8 +127,15 @@
         [self presentViewController:loginVC animated:YES completion:nil];
         
     }else if (indexPath.row == 2){
-        FrendsController * vc = [[FrendsController alloc]init];
+        FriendsController * vc = [[FriendsController alloc]init];
         [self presentViewController:vc animated:YES completion:nil];
+    }else if (indexPath.row == 3){
+        HTMLController * vc = [[HTMLController alloc]init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }else if (indexPath.row == 4){
+        LayerController * vc = [[LayerController alloc]init];
+        [self presentViewController:vc animated:YES completion:nil];
+        
     }
 }
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

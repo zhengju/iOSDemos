@@ -14,6 +14,7 @@ target "BigAPP" do
     #pod 'StepSlider', '~> 1.2.1'
     pod 'AFNetworking'
     pod 'KMCGeigerCounter' #卡顿检测
+    pod "Aspects"  #hook
     #友盟系列
     #pod 'UMCCommon'#基础库
     #pod 'UMCAnalytics'#统计

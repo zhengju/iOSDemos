@@ -24,8 +24,18 @@
 		185BF38C23B982E600C8224F /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF38A23B982E600C8224F /* LoginController.m */; };
 		185BF38D23B982E600C8224F /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185BF38B23B982E600C8224F /* LoginController.xib */; };
 		185BF39023B98A9900C8224F /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185BF38F23B98A9900C8224F /* LoginViewModel.m */; };
-		18B1472023B9FF2800462D68 /* FrendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1471F23B9FF2800462D68 /* FrendsController.swift */; };
+		18B1472023B9FF2800462D68 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1471F23B9FF2800462D68 /* FriendsController.swift */; };
 		18B1472323BA029A00462D68 /* VCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1472223BA029A00462D68 /* VCModel.m */; };
+		18B1472523BA297500462D68 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1472423BA297500462D68 /* FriendModel.swift */; };
+		18B1472923BAC50900462D68 /* UIViewController+Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1472823BAC50900462D68 /* UIViewController+Logging.m */; };
+		18B1474123BC7E2E00462D68 /* ZJImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1474023BC7E2E00462D68 /* ZJImageManager.m */; };
+		18B1474623BC82CA00462D68 /* LCImageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1474323BC82C900462D68 /* LCImageDownloadManager.m */; };
+		18B1474723BC82CA00462D68 /* LCNetworkImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1474423BC82CA00462D68 /* LCNetworkImageView.m */; };
+		18B1474B23BCC35E00462D68 /* HTMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1474A23BCC35E00462D68 /* HTMLController.m */; };
+		18C6D12223C1D0010025DB82 /* LayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6D12123C1D0010025DB82 /* LayerController.m */; };
+		18C6D12523C1D05D0025DB82 /* ZJLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6D12423C1D05D0025DB82 /* ZJLayer.m */; };
+		18C6D12823C1D6A60025DB82 /* BGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6D12723C1D6A60025DB82 /* BGView.m */; };
+		18C6D12A23C1D94B0025DB82 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18C6D12923C1D94B0025DB82 /* test.jpg */; };
 		2DE934C74CD745C16EAED0AC /* Pods_BigAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,9 +73,27 @@
 		185BF38E23B98A9900C8224F /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		185BF38F23B98A9900C8224F /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		18B1471C23B9FEEB00462D68 /* BigAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigAPP-Bridging-Header.h"; sourceTree = "<group>"; };
-		18B1471F23B9FF2800462D68 /* FrendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrendsController.swift; sourceTree = "<group>"; };
+		18B1471F23B9FF2800462D68 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		18B1472123BA029A00462D68 /* VCModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCModel.h; sourceTree = "<group>"; };
 		18B1472223BA029A00462D68 /* VCModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCModel.m; sourceTree = "<group>"; };
+		18B1472423BA297500462D68 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
+		18B1472723BAC50900462D68 /* UIViewController+Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Logging.h"; sourceTree = "<group>"; };
+		18B1472823BAC50900462D68 /* UIViewController+Logging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Logging.m"; sourceTree = "<group>"; };
+		18B1473F23BC7E2E00462D68 /* ZJImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJImageManager.h; sourceTree = "<group>"; };
+		18B1474023BC7E2E00462D68 /* ZJImageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJImageManager.m; sourceTree = "<group>"; };
+		18B1474223BC82C900462D68 /* LCNetworkImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCNetworkImageView.h; sourceTree = "<group>"; };
+		18B1474323BC82C900462D68 /* LCImageDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCImageDownloadManager.m; sourceTree = "<group>"; };
+		18B1474423BC82CA00462D68 /* LCNetworkImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCNetworkImageView.m; sourceTree = "<group>"; };
+		18B1474523BC82CA00462D68 /* LCImageDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCImageDownloadManager.h; sourceTree = "<group>"; };
+		18B1474923BCC35E00462D68 /* HTMLController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTMLController.h; sourceTree = "<group>"; };
+		18B1474A23BCC35E00462D68 /* HTMLController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTMLController.m; sourceTree = "<group>"; };
+		18C6D12023C1D0010025DB82 /* LayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LayerController.h; sourceTree = "<group>"; };
+		18C6D12123C1D0010025DB82 /* LayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LayerController.m; sourceTree = "<group>"; };
+		18C6D12323C1D05D0025DB82 /* ZJLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJLayer.h; sourceTree = "<group>"; };
+		18C6D12423C1D05D0025DB82 /* ZJLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZJLayer.m; sourceTree = "<group>"; };
+		18C6D12623C1D6A60025DB82 /* BGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGView.h; sourceTree = "<group>"; };
+		18C6D12723C1D6A60025DB82 /* BGView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGView.m; sourceTree = "<group>"; };
+		18C6D12923C1D94B0025DB82 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1FB54E9ABC03060B59BC43A /* Pods-BigAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.release.xcconfig"; sourceTree = "<group>"; };
 		D88B9B280336B85DF0BB8481 /* Pods-BigAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +122,7 @@
 		182239C623AD03A700AE2E6D = {
 			isa = PBXGroup;
 			children = (
+				18C6D12923C1D94B0025DB82 /* test.jpg */,
 				18B1471B23B9FEB400462D68 /* Swift */,
 				182239D123AD03A700AE2E6D /* BigAPP */,
 				182239D023AD03A700AE2E6D /* Products */,
@@ -113,6 +142,10 @@
 		182239D123AD03A700AE2E6D /* BigAPP */ = {
 			isa = PBXGroup;
 			children = (
+				18C6D11F23C1CFF00025DB82 /* Layer */,
+				18B1474823BCC34300462D68 /* WK */,
+				18B1473E23BC7E0300462D68 /* 图片缓存模块 */,
+				18B1472623BAC47F00462D68 /* 埋点模块 */,
 				185BF38823B982C600C8224F /* 登录模块 */,
 				182239D223AD03A700AE2E6D /* AppDelegate.h */,
 				182239D323AD03A700AE2E6D /* AppDelegate.m */,
@@ -186,9 +219,54 @@
 			isa = PBXGroup;
 			children = (
 				18B1471C23B9FEEB00462D68 /* BigAPP-Bridging-Header.h */,
-				18B1471F23B9FF2800462D68 /* FrendsController.swift */,
+				18B1471F23B9FF2800462D68 /* FriendsController.swift */,
+				18B1472423BA297500462D68 /* FriendModel.swift */,
 			);
 			path = Swift;
+			sourceTree = "<group>";
+		};
+		18B1472623BAC47F00462D68 /* 埋点模块 */ = {
+			isa = PBXGroup;
+			children = (
+				18B1472723BAC50900462D68 /* UIViewController+Logging.h */,
+				18B1472823BAC50900462D68 /* UIViewController+Logging.m */,
+			);
+			name = "埋点模块";
+			sourceTree = "<group>";
+		};
+		18B1473E23BC7E0300462D68 /* 图片缓存模块 */ = {
+			isa = PBXGroup;
+			children = (
+				18B1474523BC82CA00462D68 /* LCImageDownloadManager.h */,
+				18B1474323BC82C900462D68 /* LCImageDownloadManager.m */,
+				18B1474223BC82C900462D68 /* LCNetworkImageView.h */,
+				18B1474423BC82CA00462D68 /* LCNetworkImageView.m */,
+				18B1473F23BC7E2E00462D68 /* ZJImageManager.h */,
+				18B1474023BC7E2E00462D68 /* ZJImageManager.m */,
+			);
+			name = "图片缓存模块";
+			sourceTree = "<group>";
+		};
+		18B1474823BCC34300462D68 /* WK */ = {
+			isa = PBXGroup;
+			children = (
+				18B1474923BCC35E00462D68 /* HTMLController.h */,
+				18B1474A23BCC35E00462D68 /* HTMLController.m */,
+			);
+			name = WK;
+			sourceTree = "<group>";
+		};
+		18C6D11F23C1CFF00025DB82 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				18C6D12023C1D0010025DB82 /* LayerController.h */,
+				18C6D12123C1D0010025DB82 /* LayerController.m */,
+				18C6D12323C1D05D0025DB82 /* ZJLayer.h */,
+				18C6D12423C1D05D0025DB82 /* ZJLayer.m */,
+				18C6D12623C1D6A60025DB82 /* BGView.h */,
+				18C6D12723C1D6A60025DB82 /* BGView.m */,
+			);
+			name = Layer;
 			sourceTree = "<group>";
 		};
 		A3825032C1394A84CD6DEACA /* Pods */ = {
@@ -262,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				182239E223AD03A800AE2E6D /* LaunchScreen.storyboard in Resources */,
+				18C6D12A23C1D94B0025DB82 /* test.jpg in Resources */,
 				185BF38D23B982E600C8224F /* LoginController.xib in Resources */,
 				182239DF23AD03A800AE2E6D /* Assets.xcassets in Resources */,
 				182239DD23AD03A700AE2E6D /* Main.storyboard in Resources */,
@@ -300,6 +379,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework",
 				"${BUILT_PRODUCTS_DIR}/BlocksKit/BlocksKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/KMCGeigerCounter/KMCGeigerCounter.framework",
@@ -314,6 +394,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aspects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BlocksKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMCGeigerCounter.framework",
@@ -362,16 +443,25 @@
 				185BF39023B98A9900C8224F /* LoginViewModel.m in Sources */,
 				182239DA23AD03A700AE2E6D /* ViewController.m in Sources */,
 				185BF34223B4EC7000C8224F /* TaskManager.m in Sources */,
+				18C6D12223C1D0010025DB82 /* LayerController.m in Sources */,
+				18B1474123BC7E2E00462D68 /* ZJImageManager.m in Sources */,
+				18B1472523BA297500462D68 /* FriendModel.swift in Sources */,
 				185BF34723B4ED6500C8224F /* ModuleA.m in Sources */,
+				18B1474B23BCC35E00462D68 /* HTMLController.m in Sources */,
 				185BF38C23B982E600C8224F /* LoginController.m in Sources */,
-				18B1472023B9FF2800462D68 /* FrendsController.swift in Sources */,
+				18B1472023B9FF2800462D68 /* FriendsController.swift in Sources */,
 				185BF35123B4EF4F00C8224F /* TaskController+ModuleB.m in Sources */,
 				18B1472323BA029A00462D68 /* VCModel.m in Sources */,
 				182239D423AD03A700AE2E6D /* AppDelegate.m in Sources */,
 				182239E523AD03A800AE2E6D /* main.m in Sources */,
+				18C6D12523C1D05D0025DB82 /* ZJLayer.m in Sources */,
+				18B1472923BAC50900462D68 /* UIViewController+Logging.m in Sources */,
 				185BF33323AD0D7000C8224F /* VCCell.m in Sources */,
 				185BF35423B4F12F00C8224F /* TaskController+ModuleA.m in Sources */,
 				182239D723AD03A700AE2E6D /* SceneDelegate.m in Sources */,
+				18B1474723BC82CA00462D68 /* LCNetworkImageView.m in Sources */,
+				18B1474623BC82CA00462D68 /* LCImageDownloadManager.m in Sources */,
+				18C6D12823C1D6A60025DB82 /* BGView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,12 +605,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2FFNFZE3QD;
 				INFOPLIST_FILE = BigAPP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZJ.BigAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = zsw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift/BigAPP-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -537,12 +628,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2FFNFZE3QD;
 				INFOPLIST_FILE = BigAPP/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZJ.BigAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = zsw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift/BigAPP-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

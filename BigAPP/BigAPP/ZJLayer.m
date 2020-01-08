@@ -8,6 +8,9 @@
 
 #import "ZJLayer.h"
 
+NSString * const name = @"name zj";
+
+
 @implementation ZJLayer
 
 

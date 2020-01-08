@@ -8,6 +8,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+//extern NSString * const name;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZJLayer : CALayer

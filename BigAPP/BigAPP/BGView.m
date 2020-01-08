@@ -8,6 +8,9 @@
 
 #import "BGView.h"
 #import <Masonry/Masonry.h>
+
+//NSString * const name = @"name zj";
+
 @interface BGView()
 @property(strong,nonatomic) UILabel * titleL;
 @end

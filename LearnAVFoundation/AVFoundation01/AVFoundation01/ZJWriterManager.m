@@ -41,8 +41,9 @@
                                     AVVideoWidthKey: [NSNumber numberWithInt:videoSize.width],
                                     AVVideoHeightKey: [NSNumber numberWithInt:videoSize.height]};
     
-    AVAssetWriterInput* writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo
-                                                                         outputSettings:videoSettings];
+    AVAssetWriterInput * _Nonnull extractedExpr = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo
+                                                                                     outputSettings:videoSettings];
+    AVAssetWriterInput* writerInput = extractedExpr;
     
     AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput
                                                                                                                      sourcePixelBufferAttributes:nil];

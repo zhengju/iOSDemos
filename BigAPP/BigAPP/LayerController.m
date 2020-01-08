@@ -39,6 +39,8 @@
     //重绘  需注意是哪一个layer重绘
     [layer setNeedsDisplay];
     
+//    NSLog(@"name is %@",name);
+    
     
     //bgView
     

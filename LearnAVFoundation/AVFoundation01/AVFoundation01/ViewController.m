@@ -46,7 +46,9 @@
     
     ZJWriterManager * writer = [[ZJWriterManager alloc]init];
     writer.images = images;
-    [writer writeVideoSize:size path:filePath];
+    [writer writeVideoSize:size path:filePath success:^{
+        
+    }];
 }
 
 @end

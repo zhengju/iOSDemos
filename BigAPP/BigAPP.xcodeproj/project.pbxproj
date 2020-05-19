@@ -37,6 +37,7 @@
 		18C6D12823C1D6A60025DB82 /* BGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6D12723C1D6A60025DB82 /* BGView.m */; };
 		18C6D12A23C1D94B0025DB82 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18C6D12923C1D94B0025DB82 /* test.jpg */; };
 		2DE934C74CD745C16EAED0AC /* Pods_BigAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */; };
+		379ECE152473DA4F00DD3983 /* SDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379ECE142473DA4E00DD3983 /* SDController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,8 @@
 		18C6D12723C1D6A60025DB82 /* BGView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGView.m; sourceTree = "<group>"; };
 		18C6D12923C1D94B0025DB82 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		2B6413D8F67DE4F21EC6B47F /* Pods_BigAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		379ECE132473DA4E00DD3983 /* SDController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDController.h; sourceTree = "<group>"; };
+		379ECE142473DA4E00DD3983 /* SDController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDController.m; sourceTree = "<group>"; };
 		C1FB54E9ABC03060B59BC43A /* Pods-BigAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.release.xcconfig"; sourceTree = "<group>"; };
 		D88B9B280336B85DF0BB8481 /* Pods-BigAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigAPP/Pods-BigAPP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +145,7 @@
 		182239D123AD03A700AE2E6D /* BigAPP */ = {
 			isa = PBXGroup;
 			children = (
+				379ECE162473DA6100DD3983 /* 研究SD */,
 				18C6D11F23C1CFF00025DB82 /* Layer */,
 				18B1474823BCC34300462D68 /* WK */,
 				18B1473E23BC7E0300462D68 /* 图片缓存模块 */,
@@ -267,6 +271,15 @@
 				18C6D12723C1D6A60025DB82 /* BGView.m */,
 			);
 			name = Layer;
+			sourceTree = "<group>";
+		};
+		379ECE162473DA6100DD3983 /* 研究SD */ = {
+			isa = PBXGroup;
+			children = (
+				379ECE132473DA4E00DD3983 /* SDController.h */,
+				379ECE142473DA4E00DD3983 /* SDController.m */,
+			);
+			path = "研究SD";
 			sourceTree = "<group>";
 		};
 		A3825032C1394A84CD6DEACA /* Pods */ = {
@@ -451,6 +464,7 @@
 				185BF38C23B982E600C8224F /* LoginController.m in Sources */,
 				18B1472023B9FF2800462D68 /* FriendsController.swift in Sources */,
 				185BF35123B4EF4F00C8224F /* TaskController+ModuleB.m in Sources */,
+				379ECE152473DA4F00DD3983 /* SDController.m in Sources */,
 				18B1472323BA029A00462D68 /* VCModel.m in Sources */,
 				182239D423AD03A700AE2E6D /* AppDelegate.m in Sources */,
 				182239E523AD03A800AE2E6D /* main.m in Sources */,

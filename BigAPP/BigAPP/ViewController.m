@@ -9,19 +9,21 @@
 #import "ViewController.h"
 #import "KMCGeigerCounter.h"
 #import "VCCell.h"
-#import "TaskController.h"
 #import "VCModel.h"
 #import "BigAPP-Swift.h"
 #import "ZJImageManager.h"
 #import "LCNetworkImageView.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "LoginController.h"
-#import "HTMLController.h"
-#import "LayerController.h"
 
 #define cellID @"cellID"
+
+NSString * const vcName = @"name";
+NSString * const viewController = @"viewController";
+
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) UITableView *tableView;
 @property(strong,nonatomic) NSMutableArray * datas;
 @end
 
@@ -35,10 +37,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
-
+    self.title = @"大类";
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
+    
+//    [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
+
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+
     [self.tableView registerClass:[VCCell class] forCellReuseIdentifier:cellID];
 
     //rac
@@ -74,16 +84,15 @@
     [mergerSignal subscribeNext:^(id x) {
         NSLog(@"合并信号执行  %@",x);
     }];
+
+    [self registerControllerWithDic:@{vcName:@"任务中心",viewController:@"TaskController"}];
+//    [self registerControllerWithDic:@{vcName:@"RAC",viewController:@"TaskController"}];
+//    [self registerControllerWithDic:@{vcName:@"Swift",viewController:@"TaskController"}];
+    [self registerControllerWithDic:@{vcName:@"WKWebView",viewController:@"HTMLController"}];
+    [self registerControllerWithDic:@{vcName:@"layer",viewController:@"LayerController"}];
+    [self registerControllerWithDic:@{vcName:@"SD研究",viewController:@"SDController"}];
     
     
-    NSArray * titles = @[@"任务中心",@"RAC",@"Swift",@"WKWebView",@"layer"];
-    
-    for (int i = 0; i < titles.count; i++) {
-        VCModel * model = [[VCModel alloc]init];
-        model.iconURL = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576860245217&di=218393fb5d459a15607d3c31dbea302c&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201210%2F24%2F20121024114828_TtcQe.jpeg";
-        model.title = titles[i];
-        [self.datas addObject:model];
-    }
     
     [self.tableView reloadData];
     
@@ -91,13 +100,22 @@
     ZJImageManager * imageManager = [[ZJImageManager alloc]init];
     [imageManager downloadImage];
 
-    LCNetworkImageView * view = [[LCNetworkImageView alloc]init];
-    [view loadImageWithURL:[NSURL URLWithString:@"http://img2.imgtn.bdimg.com/it/u=3344415164,12208452&fm=26&gp=0.jpg"] completed:^(BOOL isSuccess, UIImage *image) {
-
-    }];
+//    LCNetworkImageView * view = [[LCNetworkImageView alloc]init];
+//    [view loadImageWithURL:[NSURL URLWithString:@"http://img2.imgtn.bdimg.com/it/u=3344415164,12208452&fm=26&gp=0.jpg"] completed:^(BOOL isSuccess, UIImage *image) {
+//
+//    }];
     
     
 }
+
+- (void)registerControllerWithDic:(NSDictionary *)dict{
+    VCModel * model = [[VCModel alloc]init];
+    model.iconURL = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576860245217&di=218393fb5d459a15607d3c31dbea302c&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201210%2F24%2F20121024114828_TtcQe.jpeg";
+    model.title = [dict objectForKey:vcName];
+    model.viewController = [dict objectForKey:viewController];
+    [self.datas addObject:model];
+}
+
 - (void)viewWillLayoutSubviews{
     
 }
@@ -116,27 +134,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {//任务中心
-        
-        TaskController * vc = [[TaskController alloc]init];
-        
-        [self presentViewController:vc animated:YES completion:nil];
-        
-    }else if (indexPath.row == 1){
-        LoginController * loginVC = [[LoginController alloc]init];
-        [self presentViewController:loginVC animated:YES completion:nil];
-        
-    }else if (indexPath.row == 2){
-        FriendsController * vc = [[FriendsController alloc]init];
-        [self presentViewController:vc animated:YES completion:nil];
-    }else if (indexPath.row == 3){
-        HTMLController * vc = [[HTMLController alloc]init];
-        [self presentViewController:vc animated:YES completion:nil];
-    }else if (indexPath.row == 4){
-        LayerController * vc = [[LayerController alloc]init];
-        [self presentViewController:vc animated:YES completion:nil];
-        
-    }
+    
+    VCModel * model = self.datas[indexPath.row];
+  
+    
+    UIViewController * vc = [NSClassFromString(model.viewController) new];
+   
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.datas.count;

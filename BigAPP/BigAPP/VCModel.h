@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(copy,nonatomic) NSString * title;
 @property(copy,nonatomic) NSString * iconURL;
+@property (nonatomic,copy) NSString * viewController;
 
 @end
 

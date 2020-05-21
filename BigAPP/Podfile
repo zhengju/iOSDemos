@@ -1,10 +1,10 @@
 platform :ios, '8.0'
 use_frameworks!
-
+source 'https://cdn.cocoapods.org'
 target "BigAPP" do
 
 #    pod 'GPUImage'
-    pod 'SDWebImage', '~> 5.0.0'
+    pod 'SDWebImage'
     pod 'ReactiveCocoa', '~> 2.5'
     pod 'Masonry'
     pod 'BlocksKit', '~> 2.2.5'

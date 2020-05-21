@@ -4,7 +4,7 @@ source 'https://cdn.cocoapods.org'
 target "BigAPP" do
 
 #    pod 'GPUImage'
-    pod 'SDWebImage'
+#    pod 'SDWebImage'
     pod 'ReactiveCocoa', '~> 2.5'
     pod 'Masonry'
     pod 'BlocksKit', '~> 2.2.5'
@@ -12,7 +12,7 @@ target "BigAPP" do
     pod 'SVProgressHUD'
     pod 'FDFullscreenPopGesture'
     #pod 'StepSlider', '~> 1.2.1'
-    pod 'AFNetworking'
+#    pod 'AFNetworking'
     pod 'KMCGeigerCounter' #卡顿检测
     pod "Aspects"  #hook
     #友盟系列

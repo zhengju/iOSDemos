@@ -7,7 +7,7 @@
 //
 
 #import "SDController.h"
-#import <SDWebImage/SDWebImage.h>
+#import "UIImageView+WebCache.h"
 @interface SDController ()
 
 @end

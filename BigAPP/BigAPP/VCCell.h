@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SDWebImage/SDWebImage.h>
+#import "UIImageView+WebCache.h"
 NS_ASSUME_NONNULL_BEGIN
 @class VCModel;
 @interface VCCell : UITableViewCell

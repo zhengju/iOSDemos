@@ -1,11 +1,9 @@
 ${PODS_ROOT}/Target Support Files/Pods-BigAPP/Pods-BigAPP-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework
 ${BUILT_PRODUCTS_DIR}/BlocksKit/BlocksKit.framework
 ${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework
 ${BUILT_PRODUCTS_DIR}/KMCGeigerCounter/KMCGeigerCounter.framework
 ${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
 ${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework
-${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/Toast/Toast.framework

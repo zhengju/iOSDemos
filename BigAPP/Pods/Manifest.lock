@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
   - Aspects (1.4.1)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
@@ -40,49 +25,40 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
-  - SDWebImage (5.8.0):
-    - SDWebImage/Core (= 5.8.0)
-  - SDWebImage/Core (5.8.0)
   - SVProgressHUD (2.2.5)
   - Toast (4.0.0)
 
 DEPENDENCIES:
-  - AFNetworking
   - Aspects
   - BlocksKit (~> 2.2.5)
   - FDFullscreenPopGesture
   - KMCGeigerCounter
   - Masonry
   - ReactiveCocoa (~> 2.5)
-  - SDWebImage
   - SVProgressHUD
   - Toast
 
 SPEC REPOS:
   trunk:
-    - AFNetworking
     - Aspects
     - BlocksKit
     - FDFullscreenPopGesture
     - KMCGeigerCounter
     - Masonry
     - ReactiveCocoa
-    - SDWebImage
     - SVProgressHUD
     - Toast
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   KMCGeigerCounter: a06cfeed4a96e8f9a49028abb3ba7e53604d3219
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 6ff9d6c82d8c05178b9a99904dbec625a6ada004
+PODFILE CHECKSUM: 79d52e10c18ee9732c50a80bbe36999d528c87e6
 
 COCOAPODS: 1.9.1

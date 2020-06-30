@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3708C8D024AAE092009A2F92 /* SecondController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3708C8CF24AAE092009A2F92 /* SecondController.m */; };
 		3767F78D249B7CBE005DCDC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F78C249B7CBE005DCDC0 /* AppDelegate.m */; };
 		3767F790249B7CBE005DCDC0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F78F249B7CBE005DCDC0 /* SceneDelegate.m */; };
 		3767F793249B7CBE005DCDC0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F792249B7CBE005DCDC0 /* ViewController.m */; };
@@ -14,10 +15,12 @@
 		3767F798249B7CC3005DCDC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3767F797249B7CC3005DCDC0 /* Assets.xcassets */; };
 		3767F79B249B7CC3005DCDC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3767F799249B7CC3005DCDC0 /* LaunchScreen.storyboard */; };
 		3767F79E249B7CC3005DCDC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F79D249B7CC3005DCDC0 /* main.m */; };
-		3767F7A6249B7CE5005DCDC0 /* SpringBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F7A5249B7CE5005DCDC0 /* SpringBoxManager.m */; };
+		3767F7A6249B7CE5005DCDC0 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767F7A5249B7CE5005DCDC0 /* AlertManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3708C8CE24AAE091009A2F92 /* SecondController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondController.h; sourceTree = "<group>"; };
+		3708C8CF24AAE092009A2F92 /* SecondController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondController.m; sourceTree = "<group>"; };
 		3767F788249B7CBD005DCDC0 /* SpringBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3767F78B249B7CBE005DCDC0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3767F78C249B7CBE005DCDC0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -30,8 +33,8 @@
 		3767F79A249B7CC3005DCDC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3767F79C249B7CC3005DCDC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3767F79D249B7CC3005DCDC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3767F7A4249B7CE5005DCDC0 /* SpringBoxManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpringBoxManager.h; sourceTree = "<group>"; };
-		3767F7A5249B7CE5005DCDC0 /* SpringBoxManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpringBoxManager.m; sourceTree = "<group>"; };
+		3767F7A4249B7CE5005DCDC0 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
+		3767F7A5249B7CE5005DCDC0 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +73,15 @@
 				3767F78F249B7CBE005DCDC0 /* SceneDelegate.m */,
 				3767F791249B7CBE005DCDC0 /* ViewController.h */,
 				3767F792249B7CBE005DCDC0 /* ViewController.m */,
+				3708C8CE24AAE091009A2F92 /* SecondController.h */,
+				3708C8CF24AAE092009A2F92 /* SecondController.m */,
 				3767F794249B7CBE005DCDC0 /* Main.storyboard */,
 				3767F797249B7CC3005DCDC0 /* Assets.xcassets */,
 				3767F799249B7CC3005DCDC0 /* LaunchScreen.storyboard */,
 				3767F79C249B7CC3005DCDC0 /* Info.plist */,
 				3767F79D249B7CC3005DCDC0 /* main.m */,
-				3767F7A4249B7CE5005DCDC0 /* SpringBoxManager.h */,
-				3767F7A5249B7CE5005DCDC0 /* SpringBoxManager.m */,
+				3767F7A4249B7CE5005DCDC0 /* AlertManager.h */,
+				3767F7A5249B7CE5005DCDC0 /* AlertManager.m */,
 			);
 			path = SpringBox;
 			sourceTree = "<group>";
@@ -151,9 +156,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3767F7A6249B7CE5005DCDC0 /* SpringBoxManager.m in Sources */,
+				3767F7A6249B7CE5005DCDC0 /* AlertManager.m in Sources */,
 				3767F793249B7CBE005DCDC0 /* ViewController.m in Sources */,
 				3767F78D249B7CBE005DCDC0 /* AppDelegate.m in Sources */,
+				3708C8D024AAE092009A2F92 /* SecondController.m in Sources */,
 				3767F79E249B7CC3005DCDC0 /* main.m in Sources */,
 				3767F790249B7CBE005DCDC0 /* SceneDelegate.m in Sources */,
 			);

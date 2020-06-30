@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "SpringBoxManager.h"
+#import "AlertManager.h"
+#import "SecondController.h"
 @interface ViewController ()
-@property (nonatomic,strong) SpringBoxManager *manager;
+@property (nonatomic,strong) AlertManager *manager;
 @end
 
 @implementation ViewController
@@ -17,26 +18,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.manager = [SpringBoxManager shareManager];
+    self.manager = [AlertManager shareManager];
 
     self.view.backgroundColor = [UIColor greenColor];
-    
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.manager alertShowWithType:@"1"];
-//        });
-//        
-//    });
-   
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        sleep(2);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.manager alertShowWithType:@"2"];
-        });
-    });
-    
+ 
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    SecondController * vc = [[SecondController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

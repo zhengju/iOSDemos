@@ -8,8 +8,6 @@
 
 #import "AlertManager.h"
 
-
-
 #define ZJSemaphoreCreate \
 static dispatch_semaphore_t signalSemaphore; \
 static dispatch_once_t onceTokenSemaphore; \
@@ -89,11 +87,18 @@ static AlertManager *_shareInstance = nil;
     NSArray * keys = self.alertCache.allKeys;
     if ([keys containsObject:type]) {
         successBlock(NO,@"type标识重复");
+        NSLog(@"type(%@)标识重复",type);
         return;
     }
     
+    //重置优先级
+    if (config.priority != AlertPriority1 && config.priority != AlertPriority2 && config.priority != AlertPriority3) {
+        config.priority = AlertPriority1;
+    }
+    
+    config.alertType = type;
     config.block = successBlock;
-    config.isDisplay = YES;
+    config.isDisplay = YES;//设置为当前显示
     //加入缓存
     ZJSemaphoreCreate
     ZJSemaphoreWait
@@ -108,7 +113,7 @@ static AlertManager *_shareInstance = nil;
             [self.alertCache removeObjectForKey:type];
             ZJSemaphoreSignal
         }
-        config.isDisplay = NO;
+        config.isDisplay = NO;//重置为当前隐藏
         return;
     }
     
@@ -124,7 +129,7 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreWait
     [self.alertCache removeObjectForKey:type];
     ZJSemaphoreSignal
-    NSArray * values = [[self.alertCache.allValues reverseObjectEnumerator] allObjects];//逆序
+    NSArray * values = self.alertCache.allValues;
     
     //判断当前是否有显示-有，不显示弹框拦截的弹框
     if ([self displayAlert]) {
@@ -172,8 +177,8 @@ static AlertManager *_shareInstance = nil;
 
 #pragma mark - 根据优先级排序 根据priority降序
 
-- (NSArray *)sortByPriority:(NSArray *)allKeys {
-    
+- (NSArray *)sortByPriority:(NSArray *)allValues {
+    //排序
     NSComparator cmptr = ^(AlertConfig *obj1, AlertConfig *obj2){
         if (obj1.priority > obj2.priority) {
             return (NSComparisonResult)NSOrderedAscending;
@@ -184,7 +189,7 @@ static AlertManager *_shareInstance = nil;
         }
         return (NSComparisonResult)NSOrderedSame;
     };
-    return [allKeys sortedArrayUsingComparator:cmptr];
+    return [allValues sortedArrayUsingComparator:cmptr];
 }
 
 #pragma mark - 清除被拦截且不被激活的弹框
@@ -201,6 +206,13 @@ static AlertManager *_shareInstance = nil;
             ZJSemaphoreSignal
         }
     }
+}
+
+- (void)clearCache {
+    ZJSemaphoreCreate
+    ZJSemaphoreWait
+    [self.alertCache removeAllObjects];
+    ZJSemaphoreSignal;
 }
 
 @end

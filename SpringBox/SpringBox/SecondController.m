@@ -35,9 +35,44 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showAlertViewB];
         [self showAlertViewC];
+        [self alert];
     });
 
 }
+
+- (void)alert {
+    AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
+    config.priority = AlertPriority3;
+    [self.manager alertShowWithType:@"alertD" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
+        if (isSuccess) {
+            [self _alertShow];
+        }
+    }];
+}
+
+- (void)_alertShow {
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"这是个弹框" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self _alertHidden];
+       }];
+    
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self _alertHidden];
+    }];
+    
+    [alert addAction:sureAction];
+    [alert addAction:cancelAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)_alertHidden {
+    [self.manager alertDissMissWithType:@"alertD" success:^(BOOL isSuccess, NSString * _Nonnull message) {
+        
+    }];
+}
+
 - (UIView *)alertView {
     if (!_alertView) {
         _alertView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -112,7 +147,7 @@
 - (void)showAlertViewB {
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
-    config.priority = 2;
+    config.priority = AlertPriority3;
     [self.manager alertShowWithType:@"alertB" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {
             self.alertViewB.hidden = NO;
@@ -132,7 +167,7 @@
 - (void)showAlertViewC {
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
-    config.priority = 3;
+    config.priority = AlertPriority2;
 //    config.isIntercept = NO;
     [self.manager alertShowWithType:@"alertC" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {

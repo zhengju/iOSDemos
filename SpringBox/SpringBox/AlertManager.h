@@ -10,11 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, AlertPriority) {
+    AlertPriority1 = 1,
+    AlertPriority2,
+    AlertPriority3
+};
+
 typedef void(^Block)(BOOL isSuccess,NSString *message);
 
 @interface AlertConfig : NSObject
 
-@property (nonatomic,assign) NSInteger alertType;
+@property (nonatomic,copy) NSString *alertType;
 
 ///  是否被拦截阻断 默认是YES
 @property (nonatomic,assign) BOOL isIntercept;
@@ -25,8 +31,8 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 /// 当前的弹框是否已经在显示
 @property (nonatomic,assign) BOOL isDisplay;
 
-/// 优先级 1 2 3 .. 默认0
-@property (nonatomic,assign) NSInteger priority;
+/// 优先级 1 2 3 .. 默认1 设置其他值会重置成1
+@property (nonatomic,assign) AlertPriority priority;
 
 @property (nonatomic,strong) NSDictionary *params;
 
@@ -49,6 +55,9 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 - (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config success:(Block)successBlock;
 
 - (void)alertDissMissWithType:(NSString *)type success:(Block)successBlock;
+
+/// 清楚缓存
+- (void)clearCache;
 
 @end
 

@@ -133,8 +133,8 @@
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = 3;
-    config.isIntercept = NO;
-    [self.manager alertShowWithType:@"alert" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
+//    config.isIntercept = NO;
+    [self.manager alertShowWithType:@"alertC" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {
             self.alertViewC.hidden = NO;
         }else {

@@ -29,7 +29,8 @@
 
 @interface AlertManager()
 
-@property (nonatomic,strong) NSMutableDictionary *springBoxDict;
+/// 是否根据优先级排序 默认YES
+@property (nonatomic,assign) BOOL isSortByPriority;
 
 /// 弹框缓存
 @property (nonatomic,strong) NSMutableDictionary *alertCache;
@@ -37,6 +38,7 @@
 @end
 
 @implementation AlertManager
+
 static AlertManager *_shareInstance = nil;
 + (instancetype)shareManager {
     static dispatch_once_t onceToken;
@@ -61,8 +63,8 @@ static AlertManager *_shareInstance = nil;
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.springBoxDict = [NSMutableDictionary dictionaryWithCapacity:0];
         self.alertCache = [NSMutableDictionary dictionaryWithCapacity:0];
+        self.isSortByPriority = YES;
     }
     return self;
 }
@@ -77,6 +79,7 @@ static AlertManager *_shareInstance = nil;
     }
     
     config.block = successBlock;
+    config.isDisplay = YES;
     //加入缓存
     [self.alertCache setObject:config forKey:type];
     
@@ -86,7 +89,7 @@ static AlertManager *_shareInstance = nil;
         if (!config.isActivate) {
             [self.alertCache removeObjectForKey:type];
         }
-
+        config.isDisplay = NO;
         return;
     }
     
@@ -101,10 +104,13 @@ static AlertManager *_shareInstance = nil;
     [self.alertCache removeObjectForKey:type];
     NSArray * values = [[self.alertCache.allValues reverseObjectEnumerator] allObjects];//逆序
     
-    //判断当前是否有显示-有，不显示弹框
-    
-    values = [self sortByPriority:values];
-    NSLog(@"%@",self.alertCache);
+    //判断当前是否有显示-有，不显示弹框拦截的弹框
+    if ([self displayAlert]) {
+        return;
+    }
+    if (self.isSortByPriority) {
+        values = [self sortByPriority:values];
+    }
     //接下来是要显示被拦截的弹框
     if (values.count > 0) {
 
@@ -124,6 +130,22 @@ static AlertManager *_shareInstance = nil;
             }
         }
     }
+}
+
+#pragma mark - 排查当前是否有在显示的弹框
+
+- (BOOL)displayAlert {
+    
+    BOOL display = NO;
+    NSArray * keys = [self.alertCache allKeys];
+    for (NSString *key in keys) {
+        AlertConfig *config = [self.alertCache objectForKey:key];
+        if (config.isDisplay) {
+            display = YES;
+            break;
+        }
+    }
+    return display;
 }
 
 #pragma mark - 根据优先级排序 根据priority降序

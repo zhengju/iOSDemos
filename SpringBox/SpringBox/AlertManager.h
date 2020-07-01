@@ -22,6 +22,9 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 /// 阻断后，是否需要激活 在isIntercept为YES有效
 @property (nonatomic,assign) BOOL isActivate;
 
+/// 当前的弹框是否已经在显示
+@property (nonatomic,assign) BOOL isDisplay;
+
 /// 优先级 1 2 3 .. 默认0
 @property (nonatomic,assign) NSInteger priority;
 
@@ -37,6 +40,7 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 @interface AlertManager : NSObject
 
 + (instancetype)shareManager;
+
 
 /// 弹框展示
 /// @param type 弹框标识

@@ -84,9 +84,8 @@ static AlertManager *_shareInstance = nil;
     successBlock();
     
     //延迟释放其他block
+     [self.alertCache removeObjectForKey:type];
     NSArray * keys = self.alertCache.allKeys;
-    [self.alertCache removeObjectForKey:type];
-
     //接下来是要显示被拦截的弹框
     if (keys.count > 0) {
         

@@ -69,6 +69,13 @@ static AlertManager *_shareInstance = nil;
 
 - (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config success:(Block)successBlock{
     
+    //排查是否重复添加
+    NSArray * keys = self.alertCache.allKeys;
+    if ([keys containsObject:type]) {
+        successBlock(NO,@"type标识重复");
+        return;
+    }
+    
     config.block = successBlock;
     //加入缓存
     [self.alertCache setObject:config forKey:type];
@@ -83,12 +90,12 @@ static AlertManager *_shareInstance = nil;
         return;
     }
     
-    successBlock();
+    successBlock(YES,@"");
 }
 
 - (void)alertDissMissWithType:(NSString *)type success:(Block)successBlock{
     
-    successBlock();
+    successBlock(YES,@"");
     
     //延迟释放其他block
     [self.alertCache removeObjectForKey:type];
@@ -111,7 +118,7 @@ static AlertManager *_shareInstance = nil;
             if (config.isIntercept && config.isActivate && block) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
-                    block();
+                    block(YES,@"");
                 });
                 break;
             }

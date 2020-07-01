@@ -95,14 +95,16 @@
     config.priority = 3;
     config.isIntercept = NO;
     
-    [self.manager alertShowWithType:@"alert" config:config success:^{
-        self.alertView.hidden = NO;
+    [self.manager alertShowWithType:@"alert" config:config success:^(BOOL isSuccess, NSString * _Nonnull message) {
+        if (isSuccess) {
+            self.alertView.hidden = NO;
+        }
     }];
 }
 
 - (void)hiddenAlertView {
     
-    [self.manager alertDissMissWithType:@"alert" success:^{
+    [self.manager alertDissMissWithType:@"alert" success:^(BOOL isSuccess, NSString * _Nonnull message) {
         self.alertView.hidden = YES;
     }];
 }
@@ -111,15 +113,17 @@
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = 2;
-    [self.manager alertShowWithType:@"alertB" config:config  success:^{
-        self.alertViewB.hidden = NO;
+    [self.manager alertShowWithType:@"alertB" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
+        if (isSuccess) {
+            self.alertViewB.hidden = NO;
+        }
     }];
     
 }
 
 - (void)hiddenAlertViewB {
     
-    [self.manager alertDissMissWithType:@"alertB" success:^{
+    [self.manager alertDissMissWithType:@"alertB" success:^(BOOL isSuccess, NSString * _Nonnull message) {
         self.alertViewB.hidden = YES;
     }];
 }
@@ -130,15 +134,18 @@
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = 3;
     config.isIntercept = NO;
-    [self.manager alertShowWithType:@"alertC" config:config  success:^{
-        self.alertViewC.hidden = NO;
+    [self.manager alertShowWithType:@"alert" config:config  success:^(BOOL isSuccess, NSString * _Nonnull message) {
+        if (isSuccess) {
+            self.alertViewC.hidden = NO;
+        }else {
+            NSLog(@"error is %@",message);
+        }
     }];
-    
 }
 
 - (void)hiddenAlertViewC {
     
-    [self.manager alertDissMissWithType:@"alertC" success:^{
+    [self.manager alertDissMissWithType:@"alertC" success:^(BOOL isSuccess, NSString * _Nonnull message) {
         self.alertViewC.hidden = YES;
     }];
 }

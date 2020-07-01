@@ -22,8 +22,9 @@ typedef void(^Block)(void);
 /// 阻断后，是否需要激活 在isIntercept为YES有效
 @property (nonatomic,assign) BOOL isActivate;
 
-/// 优先级
+/// 优先级 1 2 3 .. 默认0
 @property (nonatomic,assign) NSInteger priority;
+
 @property (nonatomic,strong) NSDictionary *params;
 
 @property (nonatomic,copy) Block block;
@@ -48,3 +49,4 @@ typedef void(^Block)(void);
 @end
 
 NS_ASSUME_NONNULL_END
+//开发优先级 排序：在diss时排序

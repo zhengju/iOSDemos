@@ -11,9 +11,12 @@
 @interface SecondController ()
 
 @property (nonatomic,strong) UIView *alertView;
+
 @property (nonatomic,strong) UIView *alertViewB;
+@property (nonatomic,strong) UIView *alertViewC;
 
 @property (nonatomic,strong) AlertManager *manager;
+
 @end
 
 @implementation SecondController
@@ -31,6 +34,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showAlertViewB];
+        [self showAlertViewC];
     });
 
 }
@@ -57,7 +61,7 @@
         UILabel * titleL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 160, 30)];
         titleL.textColor = [UIColor whiteColor];
         titleL.textAlignment = NSTextAlignmentCenter;
-        titleL.text = @"这是大弹框";
+        titleL.text = @"这是大弹框B";
         [titleL setCenter:_alertViewB.center];
         [_alertViewB addSubview:titleL];
         [_alertViewB setCenter:self.view.center];
@@ -67,13 +71,29 @@
     }
     return _alertViewB;
 }
-
+- (UIView *)alertViewC {
+    if (!_alertViewC) {
+        _alertViewC = [[UIView alloc]initWithFrame:self.view.bounds];
+        _alertViewC.backgroundColor = [UIColor grayColor];
+        UILabel * titleL = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 160, 30)];
+        titleL.textColor = [UIColor whiteColor];
+        titleL.textAlignment = NSTextAlignmentCenter;
+        titleL.text = @"这是大弹框C";
+        [titleL setCenter:_alertViewC.center];
+        [_alertViewC addSubview:titleL];
+        [_alertViewC setCenter:self.view.center];
+        [self.view addSubview:_alertViewC];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenAlertViewC)];
+        [_alertViewC addGestureRecognizer:tap];
+    }
+    return _alertViewC;
+}
 
 - (void)showAlertView {
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
-    
-//    config.isIntercept = NO;
+    config.priority = 3;
+    config.isIntercept = NO;
     
     [self.manager alertShowWithType:@"alert" config:config success:^{
         self.alertView.hidden = NO;
@@ -90,7 +110,7 @@
 - (void)showAlertViewB {
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
-    
+    config.priority = 2;
     [self.manager alertShowWithType:@"alertB" config:config  success:^{
         self.alertViewB.hidden = NO;
     }];
@@ -101,6 +121,25 @@
     
     [self.manager alertDissMissWithType:@"alertB" success:^{
         self.alertViewB.hidden = YES;
+    }];
+}
+
+
+- (void)showAlertViewC {
+    
+    AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
+    config.priority = 3;
+    config.isIntercept = NO;
+    [self.manager alertShowWithType:@"alertC" config:config  success:^{
+        self.alertViewC.hidden = NO;
+    }];
+    
+}
+
+- (void)hiddenAlertViewC {
+    
+    [self.manager alertDissMissWithType:@"alertC" success:^{
+        self.alertViewC.hidden = YES;
     }];
 }
 

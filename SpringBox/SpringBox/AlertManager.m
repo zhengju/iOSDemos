@@ -74,6 +74,12 @@ static AlertManager *_shareInstance = nil;
     [self.alertCache setObject:config forKey:type];
     
     if (config.isIntercept && self.alertCache.allKeys.count > 1) {//self.alertCache.allKeys.count > 1 表示当前有弹框在显示
+        
+        //在此移除被拦截并且不被激活的弹框
+        if (!config.isActivate) {
+            [self.alertCache removeObjectForKey:type];
+        }
+
         return;
     }
     
@@ -81,35 +87,66 @@ static AlertManager *_shareInstance = nil;
 }
 
 - (void)alertDissMissWithType:(NSString *)type success:(Block)successBlock{
+    
     successBlock();
     
     //延迟释放其他block
-     [self.alertCache removeObjectForKey:type];
-    NSArray * keys = self.alertCache.allKeys;
+    [self.alertCache removeObjectForKey:type];
+    NSArray * values = [[self.alertCache.allValues reverseObjectEnumerator] allObjects];//逆序
+    
+    //判断当前是否有显示-有，不显示弹框
+    
+    values = [self sortByPriority:values];
+    NSLog(@"%@",self.alertCache);
     //接下来是要显示被拦截的弹框
-    if (keys.count > 0) {
-        
-        AlertConfig * config = [self.alertCache objectForKey:[keys firstObject]];
-        Block  block = config.block;
-        
+    if (values.count > 0) {
+
         //查找是否有可以显示的弹框 条件：1.已加入缓存 2.被拦截 3.可以激活显示
-        //目前是从先加入的找起
+        //目前是从先加入的找起->优先级
         
-        for (NSString * key in keys) {
-            
-            AlertConfig * config = [self.alertCache objectForKey:key];
+        for (AlertConfig * config in values) {
+
+            Block  block = config.block;
             
             if (config.isIntercept && config.isActivate && block) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
                     block();
                 });
                 break;
-            }else {//不符合条件的可以在此移除
-                [self.alertCache removeObjectForKey:type];
             }
         }
     }
 }
 
+#pragma mark - 根据优先级排序 根据priority降序
+
+- (NSArray *)sortByPriority:(NSArray *)allKeys {
+    
+    NSComparator cmptr = ^(AlertConfig *obj1, AlertConfig *obj2){
+        if (obj1.priority > obj2.priority) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        
+        if (obj1.priority < obj2.priority) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    };
+    return [allKeys sortedArrayUsingComparator:cmptr];
+}
+
+#pragma mark - 清除被拦截且不被激活的弹框
+
+- (void)clearWithNoActivate {
+    
+    NSArray * keys = [self.alertCache allKeys];
+    for (NSString *key in keys) {
+        AlertConfig *config = [self.alertCache objectForKey:key];
+        if (config.isIntercept && !config.isActivate) {
+            [self.alertCache removeObjectForKey:key];
+        }
+    }
+}
+
 @end
-//结尾移除

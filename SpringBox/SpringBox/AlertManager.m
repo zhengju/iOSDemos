@@ -9,6 +9,20 @@
 #import "AlertManager.h"
 
 
+
+#define ZJSemaphoreCreate \
+static dispatch_semaphore_t signalSemaphore; \
+static dispatch_once_t onceTokenSemaphore; \
+dispatch_once(&onceTokenSemaphore, ^{ \
+    signalSemaphore = dispatch_semaphore_create(1); \
+});
+
+#define ZJSemaphoreWait \
+dispatch_semaphore_wait(signalSemaphore, DISPATCH_TIME_FOREVER);
+
+#define ZJSemaphoreSignal \
+dispatch_semaphore_signal(signalSemaphore);
+
 @interface AlertConfig()
 
 @end
@@ -81,13 +95,18 @@ static AlertManager *_shareInstance = nil;
     config.block = successBlock;
     config.isDisplay = YES;
     //加入缓存
+    ZJSemaphoreCreate
+    ZJSemaphoreWait
     [self.alertCache setObject:config forKey:type];
-    
+    ZJSemaphoreSignal
     if (config.isIntercept && self.alertCache.allKeys.count > 1) {//self.alertCache.allKeys.count > 1 表示当前有弹框在显示
         
         //在此移除被拦截并且不被激活的弹框
         if (!config.isActivate) {
+            ZJSemaphoreCreate
+            ZJSemaphoreWait
             [self.alertCache removeObjectForKey:type];
+            ZJSemaphoreSignal
         }
         config.isDisplay = NO;
         return;
@@ -101,7 +120,10 @@ static AlertManager *_shareInstance = nil;
     successBlock(YES,@"");
     
     //延迟释放其他block
+    ZJSemaphoreCreate
+    ZJSemaphoreWait
     [self.alertCache removeObjectForKey:type];
+    ZJSemaphoreSignal
     NSArray * values = [[self.alertCache.allValues reverseObjectEnumerator] allObjects];//逆序
     
     //判断当前是否有显示-有，不显示弹框拦截的弹框
@@ -173,7 +195,10 @@ static AlertManager *_shareInstance = nil;
     for (NSString *key in keys) {
         AlertConfig *config = [self.alertCache objectForKey:key];
         if (config.isIntercept && !config.isActivate) {
+            ZJSemaphoreCreate
+            ZJSemaphoreWait
             [self.alertCache removeObjectForKey:key];
+            ZJSemaphoreSignal
         }
     }
 }

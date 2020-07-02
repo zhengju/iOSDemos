@@ -36,7 +36,9 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 
 @property (nonatomic,strong) NSDictionary *params;
 
-@property (nonatomic,copy) Block block;
+@property (nonatomic,copy) Block showBlock;
+
+@property (nonatomic,copy) Block dismissBlock;
 
 - (instancetype)initWithPatams:(NSDictionary *)params activate:(BOOL)isActivate;
 
@@ -47,17 +49,27 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 
 + (instancetype)shareManager;
 
+/// 是否根据优先级排序 默认YES
+@property (nonatomic,assign,readonly) BOOL isSortByPriority;
+
+///被遮挡后的弹框先隐藏 默认是YES显示
+@property (nonatomic,assign,readonly) BOOL isDisplayAfterCover;
 
 /// 弹框展示
 /// @param type 弹框标识
 /// @param config 配置
-/// @param successBlock 回调
-- (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config success:(Block)successBlock;
+/// @param showBlock 显示回调
+/// @param dismissBlock 隐藏回调
+- (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config show:(Block)showBlock dismiss:(Block)dismissBlock;
 
-- (void)alertDissMissWithType:(NSString *)type success:(Block)successBlock;
+- (void)alertDissMissWithType:(NSString *)type;
+
+- (void)removeWithType:(NSString *)type;
 
 /// 清楚缓存
 - (void)clearCache;
+
+
 
 @end
 

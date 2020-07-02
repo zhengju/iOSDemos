@@ -41,9 +41,6 @@ dispatch_semaphore_signal(signalSemaphore);
 
 @interface AlertManager()
 
-/// 是否根据优先级排序 默认YES
-@property (nonatomic,assign) BOOL isSortByPriority;
-
 /// 弹框缓存
 @property (nonatomic,strong) NSMutableDictionary *alertCache;
 
@@ -76,17 +73,26 @@ static AlertManager *_shareInstance = nil;
 - (instancetype)init {
     if (self = [super init]) {
         self.alertCache = [NSMutableDictionary dictionaryWithCapacity:0];
-        self.isSortByPriority = YES;
+        _isSortByPriority = YES;
+        _isDisplayAfterCover = YES;
     }
     return self;
 }
 
-- (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config success:(Block)successBlock{
+//禁止KVC
++ (BOOL)accessInstanceVariablesDirectly {
+    return NO;
+}
+
+- (void)alertShowWithType:(NSString *)type
+                   config:(AlertConfig *)config
+                     show:(nonnull Block)showBlock
+                  dismiss:(nonnull Block)dismissBlock{
     
     //排查是否重复添加
     NSArray * keys = self.alertCache.allKeys;
     if ([keys containsObject:type]) {
-        successBlock(NO,@"type标识重复");
+        showBlock(NO,@"type标识重复");
         NSLog(@"type(%@)标识重复",type);
         return;
     }
@@ -97,7 +103,8 @@ static AlertManager *_shareInstance = nil;
     }
     
     config.alertType = type;
-    config.block = successBlock;
+    config.showBlock = showBlock;
+    config.dismissBlock = dismissBlock;
     config.isDisplay = YES;//设置为当前显示
     //加入缓存
     ZJSemaphoreCreate
@@ -117,12 +124,27 @@ static AlertManager *_shareInstance = nil;
         return;
     }
     
-    successBlock(YES,@"");
+    //隐藏已经显示的弹框
+    if (!self.isDisplayAfterCover) {
+        NSArray * allKeys = [self.alertCache allKeys];
+           for (NSString *key in allKeys) {
+               AlertConfig *alertConfig = [self.alertCache objectForKey:key];
+               if (alertConfig.isDisplay&&alertConfig.dismissBlock&&alertConfig!=config) {
+                   alertConfig.isDisplay = NO;
+                   alertConfig.dismissBlock(YES,@"本次被隐藏了啊");
+               }
+           }
+    }
+    
+    showBlock(YES,@"");
 }
 
-- (void)alertDissMissWithType:(NSString *)type success:(Block)successBlock{
+- (void)alertDissMissWithType:(NSString *)type{
     
-    successBlock(YES,@"");
+    
+    AlertConfig *config = [self.alertCache objectForKey:type];
+    Block  dismissBlock = config.dismissBlock;
+    dismissBlock(YES,@"");
     
     //延迟释放其他block
     ZJSemaphoreCreate
@@ -146,12 +168,12 @@ static AlertManager *_shareInstance = nil;
         
         for (AlertConfig * config in values) {
 
-            Block  block = config.block;
+            Block showBlock = config.showBlock;
             
-            if (config.isIntercept && config.isActivate && block) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (config.isIntercept && config.isActivate && showBlock) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
-                    block(YES,@"");
+                    showBlock(YES,@"");
                 });
                 break;
             }
@@ -206,6 +228,14 @@ static AlertManager *_shareInstance = nil;
             ZJSemaphoreSignal
         }
     }
+}
+
+- (void)removeWithType:(NSString *)type {
+    ZJSemaphoreCreate
+    ZJSemaphoreWait
+    [self.alertCache removeObjectForKey:type];
+    NSLog(@"移除了 %@ %@",type,self.alertCache);
+    ZJSemaphoreSignal
 }
 
 - (void)clearCache {

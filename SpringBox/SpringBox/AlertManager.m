@@ -4,7 +4,7 @@
 //
 //  Created by zhengsw on 2020/6/18.
 //  Copyright © 2020 58. All rights reserved.
-//https://blog.csdn.net/hanhailong18/article/details/96186614
+//
 
 #import "AlertManager.h"
 

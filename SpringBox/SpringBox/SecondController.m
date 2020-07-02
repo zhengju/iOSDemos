@@ -52,7 +52,7 @@
 
 - (void)_alertShow {
     
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"这是个弹框" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"这是个提示弹框" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [self _alertHidden];
        }];

@@ -56,15 +56,12 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 @property (nonatomic,assign,readonly) BOOL isDisplayAfterCover;
 
 /// 弹框展示
-/// @param type 弹框标识
 /// @param config 配置
 /// @param showBlock 显示回调
 /// @param dismissBlock 隐藏回调
-- (void)alertShowWithType:(NSString *)type config:(AlertConfig *)config show:(Block)showBlock dismiss:(Block)dismissBlock;
+- (void)alertShowWithConfig:(AlertConfig *)config show:(Block)showBlock dismiss:(Block)dismissBlock;
 
-- (void)alertDissMissWithType:(NSString *)type;
-
-- (void)removeWithType:(NSString *)type;
+- (void)alertDissMiss;
 
 /// 清楚缓存
 - (void)clearCache;

@@ -43,7 +43,7 @@
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = AlertPriority3;
     __weak typeof(self) weakSelf = self;
-    [self.manager alertShowWithType:@"alertD" config:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
+    [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (isSuccess) {
             [strongSelf _alertShow];
@@ -72,7 +72,7 @@
 }
 
 - (void)_alertHidden {
-    [self.manager alertDissMissWithType:@"alertD"];
+    [self.manager alertDissMiss];
 }
 
 - (UIView *)alertView {
@@ -132,7 +132,7 @@
     config.priority = 3;
 //    config.isIntercept = NO;
     __weak typeof(self) weakSelf = self;
-    [self.manager alertShowWithType:@"alert" config:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
+    [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.alertView.hidden = NO;
@@ -147,7 +147,7 @@
 
 - (void)hiddenAlertView {
     
-    [self.manager alertDissMissWithType:@"alert"];
+    [self.manager alertDissMiss];
 }
 
 - (void)showAlertViewB {
@@ -155,7 +155,7 @@
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = AlertPriority3;
     __weak typeof(self) weakSelf = self;
-    [self.manager alertShowWithType:@"alertB" config:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
+    [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {
              __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.alertViewB.hidden = NO;
@@ -170,7 +170,7 @@
 
 - (void)hiddenAlertViewB {
     
-    [self.manager alertDissMissWithType:@"alertB"];
+    [self.manager alertDissMiss];
 }
 
 
@@ -180,7 +180,7 @@
     config.priority = AlertPriority2;
     config.isIntercept = NO;
     __weak typeof(self) weakSelf = self;
-    [self.manager alertShowWithType:@"alertC" config:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
+    [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {
              __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.alertViewC.hidden = NO;
@@ -194,14 +194,10 @@
 }
 
 - (void)hiddenAlertViewC {
-    [self.manager alertDissMissWithType:@"alertC"];
+    [self.manager alertDissMiss];
 }
 
 - (void)dealloc {
-    [self.manager removeWithType:@"alert"];
-    [self.manager removeWithType:@"alertB"];
-    [self.manager removeWithType:@"alertC"];
-    [self.manager removeWithType:@"alertD"];
-    
+
 }
 @end

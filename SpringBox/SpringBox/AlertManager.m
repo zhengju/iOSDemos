@@ -21,6 +21,18 @@ dispatch_semaphore_wait(signalSemaphore, DISPATCH_TIME_FOREVER);
 #define ZJSemaphoreSignal \
 dispatch_semaphore_signal(signalSemaphore);
 
+
+#define ZJSemaphoreCreate1 \
+static dispatch_semaphore_t signalSemaphore1; \
+static dispatch_once_t onceTokenSemaphore1; \
+dispatch_once(&onceTokenSemaphore1, ^{ \
+    signalSemaphore1 = dispatch_semaphore_create(1); \
+});
+#define ZJSemaphoreWait1 \
+dispatch_semaphore_wait(signalSemaphore1, DISPATCH_TIME_FOREVER);
+#define ZJSemaphoreSignal1 \
+dispatch_semaphore_signal(signalSemaphore1);
+
 @interface AlertConfig()
 
 @end
@@ -43,6 +55,11 @@ dispatch_semaphore_signal(signalSemaphore);
 
 /// 弹框缓存
 @property (nonatomic,strong) NSMutableDictionary *alertCache;
+
+/// 当前显示的缓存
+@property (nonatomic,strong) NSMutableArray *currentDisplayAlerts;
+
+@property (nonatomic,assign) NSInteger num;
 
 @end
 
@@ -73,8 +90,10 @@ static AlertManager *_shareInstance = nil;
 - (instancetype)init {
     if (self = [super init]) {
         self.alertCache = [NSMutableDictionary dictionaryWithCapacity:0];
+        self.currentDisplayAlerts = [NSMutableArray arrayWithCapacity:0];
         _isSortByPriority = YES;
         _isDisplayAfterCover = YES;
+        _num = 0;
     }
     return self;
 }
@@ -84,11 +103,12 @@ static AlertManager *_shareInstance = nil;
     return NO;
 }
 
-- (void)alertShowWithType:(NSString *)type
-                   config:(AlertConfig *)config
+- (void)alertShowWithConfig:(AlertConfig *)config
                      show:(nonnull Block)showBlock
                   dismiss:(nonnull Block)dismissBlock{
     
+    NSString *type = [NSString stringWithFormat:@"type%ld",(long)self.num];//累加的type
+    self.num++;
     //排查是否重复添加
     NSArray * keys = self.alertCache.allKeys;
     if ([keys containsObject:type]) {
@@ -110,6 +130,7 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreCreate
     ZJSemaphoreWait
     [self.alertCache setObject:config forKey:type];
+    NSLog(@"alertCache is %@",self.alertCache);
     ZJSemaphoreSignal
     if (config.isIntercept && self.alertCache.allKeys.count > 1) {//self.alertCache.allKeys.count > 1 表示当前有弹框在显示
         
@@ -135,22 +156,37 @@ static AlertManager *_shareInstance = nil;
                }
            }
     }
-    
+    ZJSemaphoreCreate1
+    ZJSemaphoreWait1
+    [self.currentDisplayAlerts addObject:config];
+    ZJSemaphoreSignal1
+    NSLog(@"当前展示的 %@",self.currentDisplayAlerts);
     showBlock(YES,@"");
 }
 
-- (void)alertDissMissWithType:(NSString *)type{
+- (void)alertDissMiss{
     
+    //查找当前最上边的弹框
     
-    AlertConfig *config = [self.alertCache objectForKey:type];
-    Block  dismissBlock = config.dismissBlock;
-    dismissBlock(YES,@"");
-    
-    //延迟释放其他block
-    ZJSemaphoreCreate
-    ZJSemaphoreWait
-    [self.alertCache removeObjectForKey:type];
-    ZJSemaphoreSignal
+    AlertConfig *alertConfig = [self findAlertCurrentDisplay];
+
+    if (alertConfig) {
+        Block  dismissBlock = alertConfig.dismissBlock;
+        dismissBlock(YES,@"");
+        //延迟释放其他block
+        ZJSemaphoreCreate
+        ZJSemaphoreWait
+        [self.alertCache removeObjectForKey:alertConfig.alertType];
+        ZJSemaphoreSignal
+        
+        ZJSemaphoreCreate1
+        ZJSemaphoreWait1
+        [self.currentDisplayAlerts removeLastObject];
+        ZJSemaphoreSignal1
+        NSLog(@"alertCache is %@",self.alertCache);
+        
+    }
+
     NSArray * values = self.alertCache.allValues;
     
     //判断当前是否有显示-有，不显示弹框拦截的弹框
@@ -172,7 +208,11 @@ static AlertManager *_shareInstance = nil;
             
             if (config.isIntercept && config.isActivate && showBlock) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
+                    config.isDisplay = YES;
+                    ZJSemaphoreCreate1
+                    ZJSemaphoreWait1
+                    [self.currentDisplayAlerts addObject:config];
+                    ZJSemaphoreSignal1
                     showBlock(YES,@"");
                 });
                 break;
@@ -195,6 +235,16 @@ static AlertManager *_shareInstance = nil;
         }
     }
     return display;
+}
+
+#pragma mark - 查找当前显示的alert
+
+- (AlertConfig *)findAlertCurrentDisplay {
+    AlertConfig * alertConfig;
+    if (self.currentDisplayAlerts.count > 0) {
+        alertConfig = [self.currentDisplayAlerts lastObject];
+    }
+    return alertConfig;
 }
 
 #pragma mark - 根据优先级排序 根据priority降序

@@ -14,10 +14,8 @@ static dispatch_once_t onceTokenSemaphore; \
 dispatch_once(&onceTokenSemaphore, ^{ \
     signalSemaphore = dispatch_semaphore_create(1); \
 });
-
 #define ZJSemaphoreWait \
 dispatch_semaphore_wait(signalSemaphore, DISPATCH_TIME_FOREVER);
-
 #define ZJSemaphoreSignal \
 dispatch_semaphore_signal(signalSemaphore);
 
@@ -113,7 +111,6 @@ static AlertManager *_shareInstance = nil;
     NSArray * keys = self.alertCache.allKeys;
     if ([keys containsObject:type]) {
         showBlock(NO,@"type标识重复");
-        NSLog(@"type(%@)标识重复",type);
         return;
     }
     
@@ -130,7 +127,6 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreCreate
     ZJSemaphoreWait
     [self.alertCache setObject:config forKey:type];
-    NSLog(@"alertCache is %@",self.alertCache);
     ZJSemaphoreSignal
     if (config.isIntercept && self.alertCache.allKeys.count > 1) {//self.alertCache.allKeys.count > 1 表示当前有弹框在显示
         
@@ -160,7 +156,6 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreWait1
     [self.currentDisplayAlerts addObject:config];
     ZJSemaphoreSignal1
-    NSLog(@"当前展示的 %@",self.currentDisplayAlerts);
     showBlock(YES,@"");
 }
 
@@ -183,8 +178,6 @@ static AlertManager *_shareInstance = nil;
         ZJSemaphoreWait1
         [self.currentDisplayAlerts removeLastObject];
         ZJSemaphoreSignal1
-        NSLog(@"alertCache is %@",self.alertCache);
-        
     }
 
     NSArray * values = self.alertCache.allValues;
@@ -284,7 +277,6 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreCreate
     ZJSemaphoreWait
     [self.alertCache removeObjectForKey:type];
-    NSLog(@"移除了 %@ %@",type,self.alertCache);
     ZJSemaphoreSignal
 }
 

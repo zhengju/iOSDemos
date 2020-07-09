@@ -20,6 +20,7 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 
 @interface AlertConfig : NSObject
 
+/// 弹框标识
 @property (nonatomic,copy) NSString *alertType;
 
 ///  是否被拦截阻断 默认是YES
@@ -61,12 +62,11 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 /// @param dismissBlock 隐藏回调
 - (void)alertShowWithConfig:(AlertConfig *)config show:(Block)showBlock dismiss:(Block)dismissBlock;
 
+/// 清除弹框
 - (void)alertDissMiss;
 
 /// 清楚缓存
 - (void)clearCache;
-
-
 
 @end
 

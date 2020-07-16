@@ -107,13 +107,6 @@ static AlertManager *_shareInstance = nil;
     
     NSString *type = [NSString stringWithFormat:@"type%ld",(long)self.num];//累加的type
     self.num++;
-    //排查是否重复添加
-    NSArray * keys = self.alertCache.allKeys;
-    if ([keys containsObject:type]) {
-        showBlock(NO,@"type标识重复");
-        return;
-    }
-    
     //重置优先级
     if (config.priority != AlertPriority1 && config.priority != AlertPriority2 && config.priority != AlertPriority3) {
         config.priority = AlertPriority1;
@@ -136,8 +129,10 @@ static AlertManager *_shareInstance = nil;
             ZJSemaphoreWait
             [self.alertCache removeObjectForKey:type];
             ZJSemaphoreSignal
+        }else {//允许被激活(重新显示)
+            config.isDisplay = NO;//被打断后，重置为当前隐藏
         }
-        config.isDisplay = NO;//重置为当前隐藏
+        
         return;
     }
     
@@ -164,21 +159,7 @@ static AlertManager *_shareInstance = nil;
     //查找当前最上边的弹框
     
     AlertConfig *alertConfig = [self findAlertCurrentDisplay];
-
-    if (alertConfig) {
-        Block  dismissBlock = alertConfig.dismissBlock;
-        dismissBlock(YES,@"");
-        //延迟释放其他block
-        ZJSemaphoreCreate
-        ZJSemaphoreWait
-        [self.alertCache removeObjectForKey:alertConfig.alertType];
-        ZJSemaphoreSignal
-        
-        ZJSemaphoreCreate1
-        ZJSemaphoreWait1
-        [self.currentDisplayAlerts removeLastObject];
-        ZJSemaphoreSignal1
-    }
+    [self removeWithType:alertConfig];
 
     NSArray * values = self.alertCache.allValues;
     
@@ -232,6 +213,7 @@ static AlertManager *_shareInstance = nil;
 
 #pragma mark - 查找当前显示的alert
 
+/// 是根据添加顺序来判断是否是最上的弹框
 - (AlertConfig *)findAlertCurrentDisplay {
     AlertConfig * alertConfig;
     if (self.currentDisplayAlerts.count > 0) {
@@ -273,11 +255,24 @@ static AlertManager *_shareInstance = nil;
     }
 }
 
-- (void)removeWithType:(NSString *)type {
-    ZJSemaphoreCreate
-    ZJSemaphoreWait
-    [self.alertCache removeObjectForKey:type];
-    ZJSemaphoreSignal
+#pragma mark - 删除指定弹框
+- (void)removeWithType:(AlertConfig *)alertConfig {
+        
+    if (alertConfig) {
+        Block  dismissBlock = alertConfig.dismissBlock;
+        dismissBlock(YES,@"");
+        //延迟释放其他block
+        ZJSemaphoreCreate
+        ZJSemaphoreWait
+        [self.alertCache removeObjectForKey:alertConfig.alertType];
+        ZJSemaphoreSignal
+        
+        ZJSemaphoreCreate1
+        ZJSemaphoreWait1
+        NSInteger index = [self.currentDisplayAlerts indexOfObject:alertConfig];
+        [self.currentDisplayAlerts removeObjectAtIndex:index];
+        ZJSemaphoreSignal1
+    }
 }
 
 - (void)clearCache {
@@ -285,6 +280,12 @@ static AlertManager *_shareInstance = nil;
     ZJSemaphoreWait
     [self.alertCache removeAllObjects];
     ZJSemaphoreSignal;
+    
+    ZJSemaphoreCreate1
+    ZJSemaphoreWait1
+    [self.currentDisplayAlerts removeAllObjects];
+    ZJSemaphoreSignal1
+    
 }
 
 @end

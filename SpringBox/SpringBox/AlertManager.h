@@ -50,11 +50,11 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 
 + (instancetype)shareManager;
 
-/// 是否根据优先级排序 默认YES
+/// 是否根据优先级排序 默认YES优先级生效
 @property (nonatomic,assign,readonly) BOOL isSortByPriority;
 
-///被遮挡后的弹框先隐藏 默认是YES显示
-@property (nonatomic,assign,readonly) BOOL isDisplayAfterCover;
+/// 最大弹框数量 默认是5
+@property (nonatomic,assign) NSInteger maxAlertCount;
 
 /// 弹框展示
 /// @param config 配置
@@ -62,7 +62,7 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 /// @param dismissBlock 隐藏回调
 - (void)alertShowWithConfig:(AlertConfig *)config show:(Block)showBlock dismiss:(Block)dismissBlock;
 
-/// 清除弹框
+/// 清除弹框 每一个弹框必须要调用此方法
 - (void)alertDissMiss;
 
 /// 清楚缓存
@@ -71,4 +71,8 @@ typedef void(^Block)(BOOL isSuccess,NSString *message);
 @end
 
 NS_ASSUME_NONNULL_END
-//开发优先级 排序：在diss时排序
+
+//优先级排序显示 排序：在diss时排序
+//不考虑弹框折叠，若是后来者弹框显示，则先隐藏掉已经在显示的弹框
+//跨界面使用时 不要使用单例创建实例
+

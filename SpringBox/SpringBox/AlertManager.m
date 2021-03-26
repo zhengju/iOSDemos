@@ -19,18 +19,6 @@ dispatch_semaphore_wait(signalSemaphore, DISPATCH_TIME_FOREVER);
 #define ZJSemaphoreSignal \
 dispatch_semaphore_signal(signalSemaphore);
 
-
-#define ZJSemaphoreCreate1 \
-static dispatch_semaphore_t signalSemaphore1; \
-static dispatch_once_t onceTokenSemaphore1; \
-dispatch_once(&onceTokenSemaphore1, ^{ \
-    signalSemaphore1 = dispatch_semaphore_create(1); \
-});
-#define ZJSemaphoreWait1 \
-dispatch_semaphore_wait(signalSemaphore1, DISPATCH_TIME_FOREVER);
-#define ZJSemaphoreSignal1 \
-dispatch_semaphore_signal(signalSemaphore1);
-
 @interface AlertConfig()
 
 @end
@@ -54,10 +42,14 @@ dispatch_semaphore_signal(signalSemaphore1);
 /// 弹框缓存
 @property (nonatomic,strong) NSMutableDictionary *alertCache;
 
-/// 当前显示的缓存
-@property (nonatomic,strong) NSMutableArray *currentDisplayAlerts;
+/// 当前显示的alert弹框
+@property (nonatomic, strong) AlertConfig *currentDisplayAlertConfig;
 
 @property (nonatomic,assign) NSInteger num;
+
+/// 已经显示过的弹框，主动点击消失+1
+@property (nonatomic, assign) NSInteger displayAlertNum;
+
 
 @end
 
@@ -88,10 +80,10 @@ static AlertManager *_shareInstance = nil;
 - (instancetype)init {
     if (self = [super init]) {
         self.alertCache = [NSMutableDictionary dictionaryWithCapacity:0];
-        self.currentDisplayAlerts = [NSMutableArray arrayWithCapacity:0];
         _isSortByPriority = YES;
-        _isDisplayAfterCover = YES;
         _num = 0;
+        _displayAlertNum = 0;
+        _maxAlertCount = 5;
     }
     return self;
 }
@@ -132,41 +124,40 @@ static AlertManager *_shareInstance = nil;
         }else {//允许被激活(重新显示)
             config.isDisplay = NO;//被打断后，重置为当前隐藏
         }
-        
         return;
     }
-    
-    //隐藏已经显示的弹框
-    if (!self.isDisplayAfterCover) {
-        NSArray * allKeys = [self.alertCache allKeys];
-           for (NSString *key in allKeys) {
-               AlertConfig *alertConfig = [self.alertCache objectForKey:key];
-               if (alertConfig.isDisplay&&alertConfig.dismissBlock&&alertConfig!=config) {
-                   alertConfig.isDisplay = NO;
-                   alertConfig.dismissBlock(YES,@"本次被隐藏了啊");
-               }
-           }
+    if (self.currentDisplayAlertConfig && self.currentDisplayAlertConfig != config) {//不被拦截的弹框，已经在显示的弹框先隐藏，会在下次按算法显示
+        self.currentDisplayAlertConfig.isDisplay = NO;
+        if (self.currentDisplayAlertConfig.dismissBlock) {
+            self.currentDisplayAlertConfig.dismissBlock(YES,@"本次被隐藏了啊");
+        }
     }
-    ZJSemaphoreCreate1
-    ZJSemaphoreWait1
-    [self.currentDisplayAlerts addObject:config];
-    ZJSemaphoreSignal1
-    showBlock(YES,@"");
+    self.currentDisplayAlertConfig = config;//当前在显示的alert
+    if (showBlock) {
+        showBlock(YES,@"");
+    }
 }
 
 - (void)alertDissMiss{
-    
-    //查找当前最上边的弹框
-    
-    AlertConfig *alertConfig = [self findAlertCurrentDisplay];
-    [self removeWithType:alertConfig];
 
-    NSArray * values = self.alertCache.allValues;
-    
-    //判断当前是否有显示-有，不显示弹框拦截的弹框
-    if ([self displayAlert]) {
+    self.currentDisplayAlertConfig.isDisplay = NO;
+    if (self.currentDisplayAlertConfig.dismissBlock) {
+        self.currentDisplayAlertConfig.dismissBlock(YES,@"");
+    }
+    [self.alertCache removeObjectForKey:self.currentDisplayAlertConfig.alertType];
+
+    //弹框显示最大数量 拦截
+    self.displayAlertNum++;
+    if (self.displayAlertNum >= self.maxAlertCount) {
+        //清空
+        [self clearCache];
+        self.displayAlertNum = 0;//同一批缓存的弹框的最大数量 重新设置0
+        self.num = 0;
         return;
     }
+
+    NSArray * values = self.alertCache.allValues;
+
     if (self.isSortByPriority) {
         values = [self sortByPriority:values];
     }
@@ -183,43 +174,13 @@ static AlertManager *_shareInstance = nil;
             if (config.isIntercept && config.isActivate && showBlock) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     config.isDisplay = YES;
-                    ZJSemaphoreCreate1
-                    ZJSemaphoreWait1
-                    [self.currentDisplayAlerts addObject:config];
-                    ZJSemaphoreSignal1
                     showBlock(YES,@"");
+                    self.currentDisplayAlertConfig = config;
                 });
                 break;
             }
         }
     }
-}
-
-#pragma mark - 排查当前是否有在显示的弹框
-
-- (BOOL)displayAlert {
-    
-    BOOL display = NO;
-    NSArray * keys = [self.alertCache allKeys];
-    for (NSString *key in keys) {
-        AlertConfig *config = [self.alertCache objectForKey:key];
-        if (config.isDisplay) {
-            display = YES;
-            break;
-        }
-    }
-    return display;
-}
-
-#pragma mark - 查找当前显示的alert
-
-/// 是根据添加顺序来判断是否是最上的弹框
-- (AlertConfig *)findAlertCurrentDisplay {
-    AlertConfig * alertConfig;
-    if (self.currentDisplayAlerts.count > 0) {
-        alertConfig = [self.currentDisplayAlerts lastObject];
-    }
-    return alertConfig;
 }
 
 #pragma mark - 根据优先级排序 根据priority降序
@@ -255,37 +216,11 @@ static AlertManager *_shareInstance = nil;
     }
 }
 
-#pragma mark - 删除指定弹框
-- (void)removeWithType:(AlertConfig *)alertConfig {
-        
-    if (alertConfig) {
-        Block  dismissBlock = alertConfig.dismissBlock;
-        dismissBlock(YES,@"");
-        //延迟释放其他block
-        ZJSemaphoreCreate
-        ZJSemaphoreWait
-        [self.alertCache removeObjectForKey:alertConfig.alertType];
-        ZJSemaphoreSignal
-        
-        ZJSemaphoreCreate1
-        ZJSemaphoreWait1
-        NSInteger index = [self.currentDisplayAlerts indexOfObject:alertConfig];
-        [self.currentDisplayAlerts removeObjectAtIndex:index];
-        ZJSemaphoreSignal1
-    }
-}
-
 - (void)clearCache {
     ZJSemaphoreCreate
     ZJSemaphoreWait
     [self.alertCache removeAllObjects];
     ZJSemaphoreSignal;
-    
-    ZJSemaphoreCreate1
-    ZJSemaphoreWait1
-    [self.currentDisplayAlerts removeAllObjects];
-    ZJSemaphoreSignal1
-    
 }
 
 @end

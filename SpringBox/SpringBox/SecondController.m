@@ -26,7 +26,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"第二页面";
     self.manager = [AlertManager shareManager];
-    
+    self.manager.maxAlertCount = 3;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self showAlertView];
     });
@@ -41,7 +41,7 @@
 
 - (void)alert {
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
-    config.priority = AlertPriority3;
+    config.priority = AlertPriority2;
     __weak typeof(self) weakSelf = self;
     [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -178,7 +178,7 @@
     
     AlertConfig * config = [[AlertConfig alloc]initWithPatams:@{} activate:YES];
     config.priority = AlertPriority2;
-    config.isIntercept = NO;
+//    config.isIntercept = NO;
     __weak typeof(self) weakSelf = self;
     [self.manager alertShowWithConfig:config show:^(BOOL isSuccess, NSString * _Nonnull message) {
         if (isSuccess) {

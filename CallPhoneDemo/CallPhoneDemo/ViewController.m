@@ -23,7 +23,8 @@
  iOS 8 :有弹框提示，点击确定，拨打电话(iOS 8.3下测试)
  iOS 11 :有弹框提示，点击确定，拨打电话(iOS 11.3.1下测试)
  iOS 12 :有弹框提示，点击确定，拨打电话(iOS 12.0下测试)
- iOS 13 :有弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 13 :有底部弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 15 :有底部弹框提示，点击确定，拨打电话(iOS 15.0下测试)
  @param sender sender
  */
 - (IBAction)uRLRequesCallPhone:(UIButton *)sender {
@@ -39,7 +40,8 @@
  iOS 8 :有弹框提示，点击确定，拨打电话(iOS 8.3下测试)
  iOS 11 :有弹框提示，点击确定，拨打电话(iOS 11.3.1下测试)
  iOS 12 :有弹框提示，点击确定，拨打电话(iOS 12.0下测试)
- iOS 13 :有弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 13 :有底部弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 15 :有底部弹框提示，点击确定，拨打电话(iOS 15.0下测试)
  @param sender sender
  */
 - (IBAction)uRLTelprompCallPbone:(UIButton *)sender {
@@ -57,7 +59,8 @@
  iOS 8:未弹框提示，直接拨打电话(iOS 8.3下测试)
  iOS 11:有弹框提示，点击确定，拨打电话(iOS 11.3.1下测试)
  iOS 12:有弹框提示，点击确定，拨打电话(iOS 12.0下测试)
- iOS 13:有弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 13 :有底部弹框提示，点击确定，拨打电话(iOS 13.0下测试)
+ iOS 15 :有底部弹框提示，点击确定，拨打电话(iOS 15.0下测试)
  @param sender sender
  */
 - (IBAction)uRLTellCallPhone:(UIButton *)sender {

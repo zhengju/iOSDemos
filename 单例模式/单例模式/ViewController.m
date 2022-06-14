@@ -53,6 +53,16 @@
     }
     NSLog(@"c %@",[NSThread currentThread]);
     
+    NSString *startTime = @"2022-04-05 5:30";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    //formatter.locale = [NSLocale systemLocale];
+    formatter.dateFormat = @"yyyy-MM-dd hh:mm";
+    NSDate *hongbaoData = [formatter dateFromString:startTime];
+    
+    NSString * ss = startTime;
+    ss = @"11";
+    
+    
 }
 
 

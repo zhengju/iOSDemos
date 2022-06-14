@@ -25,6 +25,9 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
+  - SDWebImage (5.9.5):
+    - SDWebImage/Core (= 5.9.5)
+  - SDWebImage/Core (5.9.5)
   - SVProgressHUD (2.2.5)
   - Toast (4.0.0)
 
@@ -35,6 +38,7 @@ DEPENDENCIES:
   - KMCGeigerCounter
   - Masonry
   - ReactiveCocoa (~> 2.5)
+  - SDWebImage
   - SVProgressHUD
   - Toast
 
@@ -46,6 +50,7 @@ SPEC REPOS:
     - KMCGeigerCounter
     - Masonry
     - ReactiveCocoa
+    - SDWebImage
     - SVProgressHUD
     - Toast
 
@@ -56,9 +61,10 @@ SPEC CHECKSUMS:
   KMCGeigerCounter: a06cfeed4a96e8f9a49028abb3ba7e53604d3219
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  SDWebImage: 0b2ba0d56479bf6a45ecddbfd5558bea93150d25
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 79d52e10c18ee9732c50a80bbe36999d528c87e6
+PODFILE CHECKSUM: ac1aceb64ca28a622587f3726f2996dd7e453e51
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

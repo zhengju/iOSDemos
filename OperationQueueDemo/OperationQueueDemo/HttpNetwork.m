@@ -13,7 +13,7 @@
         sleep(0.2);//模拟网络请求
         dispatch_async(dispatch_get_main_queue(), ^{
             if(completBlock) {
-                completBlock(@{@"url":url});
+                completBlock(url);
             }
         });
     });

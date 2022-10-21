@@ -15,9 +15,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CircelView *circleView = [[CircelView alloc]initWithFrame:CGRectMake(100, 100, 200, 300)];
-    [self.view addSubview:circleView];
+//    CircelView *circleView = [[CircelView alloc]initWithFrame:CGRectMake(100, 100, 200, 300)];
+//    [self.view addSubview:circleView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(test) name:@"zsw" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(test) name:@"zsw" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"zsw" object:nil];
+    
 }
-
+- (void)test {
+    NSLog(@"哈哈哈");
+}
 
 @end

@@ -26,6 +26,12 @@
 }
 
 - (void)configUI {
+  
+    NSString *ss = nil;
+    NSString *str = [NSString stringWithFormat:@"%@",ss];
+    NSLog(@"--%@",str);
+    
+    
     NSMutableArray *titles = [NSMutableArray array];
     self.titles = titles;
     for (int i=0; i<6; i++) {
@@ -51,8 +57,16 @@
     }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, y);
     self.scrollView.pagingEnabled = YES;
-    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(cc) withObject:self afterDelay:0];
+//    });
 }
+
+- (void)dosumthing {
+    NSLog(@"---");
+}
+
+
 - (void)startTimer {
     self.timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         NSLog(@"定时器走了");

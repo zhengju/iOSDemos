@@ -40,7 +40,7 @@
 
 - (void)requestNetworkWithUrl:(NSString *)url {
     [HttpNetwork requestWithUrl:url completBlock:^(id  _Nonnull completData) {
-        NSLog(@"网络请求成功%@",completData);
+        NSLog(@"网络请求成功:%@",completData);
         [self requestNextNetwork];
     } failed:^{
     }];
@@ -52,7 +52,6 @@
         [invocationOperation start];
         [self.taskArray removeObjectAtIndex:0];
     }
-    
 }
 
 @end
